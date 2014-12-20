@@ -22,7 +22,7 @@ If time allows, AI will be added to some games to allow for single and multiplay
 
 Usage
 =====
-
+WIP
 
 Change Log
 ==========

@@ -26,6 +26,6 @@ WIP
 
 Change Log
 ==========
-| Date       | Description |
-|------------|-------------|
-| 2014-12-19 | Created Repo and README.md |
+| Date       | Contributor  | Description |
+|:-----------|:------------:|:------------|
+| 2014-12-19 | DZ           |Created Repo and README.md |

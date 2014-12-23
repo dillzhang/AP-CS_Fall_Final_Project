@@ -11,6 +11,7 @@ Project
 =======
 Classic Board Games Reborn on the Computer through Processing
 - [ ] Connect 4
+- [ ] Simon Says
 - [ ] Battleship
 - [ ] Go
 - [ ] Chess
@@ -29,5 +30,5 @@ Change Log
 | Date       | Contributor  | Description |
 |:-----------|:------------:|:------------|
 | 2014-12-19 | DZ           |Created Repo and README.md |
-
+| 2014-12-23 | DZ           |Started Project Simon |
 

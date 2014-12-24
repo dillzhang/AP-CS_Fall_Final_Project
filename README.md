@@ -34,4 +34,4 @@ Change Log
 | 2014-12-23 | DZ           | Implemented Flash functions |
 | 2014-12-23 | SWL          | Started Project Connect 4 |
 | 2014-12-23 | SWL          | Finished basics for Connect 4 |
-| 2014-12-23 | SWL          | Added graphics to show the winner in a clearer fashion |
+| 2014-12-24 | SWL          | Added graphics to show the winner in a clearer fashion |

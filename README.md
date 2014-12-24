@@ -31,4 +31,5 @@ Change Log
 |:-----------|:------------:|:------------|
 | 2014-12-19 | DZ           |Created Repo and README.md |
 | 2014-12-23 | DZ           |Started Project Simon |
-| 2014-12-23 | SWL          |Started Project Connect|
+| 2014-12-23 | SWL          |Started Project Connect 4|
+| 2014-12-23 | SWL          |Finished basics for Connect 4|

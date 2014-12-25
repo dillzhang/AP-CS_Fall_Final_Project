@@ -34,3 +34,4 @@ Change Log
 | 2014-12-23 | DZ           | Implemented Flash functions |
 | 2014-12-23 | SWL          | Started Project Connect 4 |
 | 2014-12-23 | SWL          | Finished basics for Connect 4 |
+| 2014-12-25 | DZ           | Able to flash colors and keep original shape |

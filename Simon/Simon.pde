@@ -1,8 +1,8 @@
-boolean drawer = false; 
+private Boolean redClick = false, greenClick = false, blueClick = false, yellowClick = false; 
 
 void setup() {
   size(800, 800);
-  background(255, 255, 255);
+  background(204, 204, 204);
 
   fill(0, 0, 0);
   ellipse(400, 400, 790, 790);
@@ -22,22 +22,16 @@ void setup() {
   drawCenter();
 }
 
-void draw() {
-  int m;
-  if (drawer){
-    m = millis();
+void mouseClicked() {
+  if (mouseX > 400 && mouseY > 400){
     flashRed();
-    drawCenter();
-    drawer = false;
+  } else if (mouseX < 400 && mouseY > 400){
+    flashGreen();
+  } else if (mouseX < 400 && mouseY < 400){
+    flashBlue();
+  } else if (mouseX > 400 && mouseY < 400){
+    flashYellow();
   }
-  
-  if (millis() - m > 10000){
-    setup();
-  }
-} 
-
-void mousePressed() {
-  drawer = true;
 }
 
 void drawCenter() {
@@ -53,29 +47,36 @@ void drawCenter() {
   text("SIMON", 400, 400);
 }
 
+void keyPressed(){
+}
 
-void flashRed() {
-  //fill(221, 0, 72);
-  fill(0,0,0);
+private void flashRed() {
+  fill(255, 100, 115);
+  //fill(0,0,0);
   arc(410, 410, 730, 730, 0, HALF_PI);
   drawCenter();
 }
 
-void flashGreen() {
-  fill(57, 255, 20);
+private void flashGreen() {
+  fill(125, 255, 165);
+  //fill(0,0,0);
   arc(390, 410, 730, 730, HALF_PI, PI);
   drawCenter();
 }
 
-void flashBlue() {
+private void flashBlue() {
   fill(125, 249, 255);
+  //fill(0,0,0);
   arc(390, 390, 730, 730, PI, PI+HALF_PI);
   drawCenter();
 }
 
-void flashYellow() {
-  fill(243, 243, 21);
-  ellipse(400, 400, 310, 310);
+private void flashYellow() {
+  fill(255, 255, 160);
+  //fill(0,0,0);
+  arc(410, 390, 730, 730, PI+HALF_PI, 2*PI);
   drawCenter();
 }
 
+void draw() {
+}

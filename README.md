@@ -36,3 +36,4 @@ Change Log
 | 2014-12-23 | SWL          | Finished basics for Connect 4 |
 | 2014-12-24 | SWL          | Added graphics to show the winner in a clearer fashion |
 | 2014-12-25 | DZ           | Able to flash colors and keep original shape |
+| 2014-12-25 | DZ           | Flashing colors change back to original color after slight delay | 

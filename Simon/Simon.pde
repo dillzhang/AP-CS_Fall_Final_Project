@@ -1,4 +1,4 @@
-private Boolean redClick = false, greenClick = false, blueClick = false, yellowClick = false; 
+private int redClick = millis(), greenClick = millis(), blueClick = millis(), yellowClick = millis();
 
 void setup() {
   size(800, 800);
@@ -55,6 +55,7 @@ private void flashRed() {
   //fill(0,0,0);
   arc(410, 410, 730, 730, 0, HALF_PI);
   drawCenter();
+  redClick = millis();
 }
 
 private void flashGreen() {
@@ -62,6 +63,7 @@ private void flashGreen() {
   //fill(0,0,0);
   arc(390, 410, 730, 730, HALF_PI, PI);
   drawCenter();
+  greenClick = millis();
 }
 
 private void flashBlue() {
@@ -69,6 +71,7 @@ private void flashBlue() {
   //fill(0,0,0);
   arc(390, 390, 730, 730, PI, PI+HALF_PI);
   drawCenter();
+  blueClick = millis();
 }
 
 private void flashYellow() {
@@ -76,7 +79,31 @@ private void flashYellow() {
   //fill(0,0,0);
   arc(410, 390, 730, 730, PI+HALF_PI, 2*PI);
   drawCenter();
+  yellowClick = millis();
 }
 
 void draw() {
+  if (redClick + 750 < millis()) {
+    fill(255, 0, 0);
+    arc(410, 410, 730, 730, 0, HALF_PI); 
+    drawCenter();
+  }
+  
+  if (greenClick + 750 < millis()) {
+    fill(0, 255, 0);
+    arc(390, 410, 730, 730, HALF_PI, PI);
+    drawCenter();
+  }
+  
+  if (blueClick + 750 < millis()) {
+    fill(0, 0, 255);
+    arc(390, 390, 730, 730, PI, PI+HALF_PI);
+    drawCenter();
+  }
+  
+  if (yellowClick + 750 < millis()) {
+    fill(255, 255, 0);
+    arc(410, 390, 730, 730, PI+HALF_PI, 2*PI);
+    drawCenter();
+  }
 }

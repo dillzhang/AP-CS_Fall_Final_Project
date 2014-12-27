@@ -1,14 +1,11 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~Instansce variables~~~~~~~~~~~~~~~~~~~~~~~~~
 
 private char[][] locations = new char[6][7];
-private int turn = 0;
+private int turn, clickLoc, addLoc, addCenter, addHeight;
 private int numTurns = 0;
-private int clickLoc = 0;
-private int addLoc = 0;
-private int addCenter = 0;
-private int addHeight = 0;
 private int wr1,wr2,wr3,wr4,wc1,wc2,wc3,wc4;
 private boolean winner = false;
+private boolean help = false;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~The Setup~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -16,12 +13,13 @@ private boolean winner = false;
   Setup creates canvas that the whole game is to be played in. 
   It resets all the instance variables that need to be reset 
   in order to start a new game. It also creates the board,
-  the new game button, and the Connect 4 title.
+  the new game button, help button, and the Connect 4 title.
 */
 void setup(){  
     numTurns = 0;
     turn = 0;
     winner = false;
+    help = false;
     stroke(63,124,231);
     background(63,124,231);
     size(800,800);
@@ -34,9 +32,10 @@ void setup(){
     }
     fill(231,214,26);
     rect(50,150,700,600);
+    textAlign(LEFT,BOTTOM);
     textSize(100);
     fill(255,255,255);
-    text("Connect Four",75, 100);
+    text("Connect Four",75, 105);
     int x = 100;
     int y = 200;
     fill(63,124,231);
@@ -50,13 +49,71 @@ void setup(){
     }
     stroke(255,255,255);
     rect(70,110,138,30);
+    rect(625,110,65,30);
     textSize(25);
     fill(255,255,255);
-    text("New Game",75,135);
+    text("New Game",75,139);
+    text("Help",630,139);
 }
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~Methods~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/*
+  showHelp shows the help text. It can be called with a
+  press of the 'm' key.
+*/
+private void showHelp(){
+    help = true;
+    stroke(255);
+    fill(63,124,231);
+    rect(50,150,700,600);
+    textAlign(LEFT,TOP);
+    textSize(25);
+    fill(255);
+    text("This is a Connect 4 game. The rules are simple. You and",52,150);
+    text("another player are to take turns putting circles in. ",52,175);
+    text("Black always starts first and the red, second. A player",52,200);
+    text("wins when four of their color are adjacent to each other",52,225);
+    text("(vertically, horizontally, or diagonally). A tie is ",52,250);
+    text("declared when the board is filled and no one has won.",52,275);
+    text("Shortcut Keys:",52,325);
+    text("1 - Column 1",52,350);
+    text("2 - Column 2",52,375);
+    text("3 - Column 3",52,400);
+    text("4 - Column 4",52,425);
+    text("5 - Column 5",52,450);
+    text("6 - Column 6",52,475);
+    text("7 - Column 7",52,500);
+    text("n - New Game",52,525);
+    text("h - Help",52,550);
+    text("Press x to exit the menu.",52,600);
+}
+
+/*
+  reDraw redraws the board if the help screen is called.
+*/
+private void reDraw(){
+    help = false;
+    int backUp = turn;
+    int backUp2 = numTurns;
+    numTurns = 0;
+    fill(231,214,26);
+    stroke(63,124,231);
+    rect(50,150,700,600);
+    for (int r = 0; r < 6; r++){
+	for (int c = 0; c < 7; c++){
+	    if (locations[r][c] == 'n') turn = -1; 
+            if (locations[r][c] == 'b') turn = 0;
+            if (locations[r][c] == 'r') turn = 1;
+            addCenter = (c + 1) * 100;
+            addHeight = 700 - r*100;
+            addPiece();
+	}
+    }
+    turn = backUp;
+    numTurns = backUp2;
+}
 
 /* 
    centerX finds the x-component of circle/game piece (addCenter) 
@@ -129,9 +186,13 @@ private void addPiece(){
 	stroke(50,45,45);
 	fill(50,45,45);
 	ellipse(addCenter,addHeight,70,70);
-    } else {
+    } else if (turn == 4){
 	stroke(255,35,75);
 	fill(255,35,75);
+	ellipse(addCenter,addHeight,70,70);
+    } else {
+	stroke(63,124,231);
+	fill(63,124,231);
 	ellipse(addCenter,addHeight,70,70);
     }
 }
@@ -239,6 +300,7 @@ private void checkWin(){
   would be written.
 */
 private void showWin(){
+    textAlign(LEFT,BOTTOM);
     if (winner){
 	if (turn == 1){
 	    fill(255,255,255);
@@ -246,7 +308,7 @@ private void showWin(){
 	    rect(50,0,700,105);
 	    textSize(60);
 	    fill(0,0,0);
-	    text("Black Wins",250,70);
+	    text("Black Wins",250,80);
 	}
 	if (turn == 0){
 	    fill(255,255,255);
@@ -254,7 +316,7 @@ private void showWin(){
 	    rect(50,0,700,105);
 	    textSize(60);
 	    fill(255,0,0);
-	    text("Red Wins",275,70);
+	    text("Red Wins",275,80);
 	}
 	if (turn == 0) turn = 4;
 	if (turn == 1) turn = 3;
@@ -287,7 +349,7 @@ private void showWin(){
   piece or if you pressed "new Game".
 */
 void mouseClicked(){
-    if (!winner && numTurns < 42){
+    if (!winner && numTurns < 42 && !help){
 	if (mouseX > 50 && mouseX < 750 && mouseY > 150){
 	    clickLoc = mouseX;
 	    centerX();
@@ -298,12 +360,67 @@ void mouseClicked(){
     if (mouseX > 70 && mouseX < 208 && mouseY > 110 && mouseY < 140){
 	setup();
     }
+    if (mouseX > 625 && mouseX < 700 && mouseY > 110 && mouseY < 140){
+	showHelp();
+    }
 }
-// if the letter "n" is pressed, a new game is setup
+/*
+  If the letter "n" is pressed, a new game is setup. You can play
+  the entire game by just pressing the number of the column 
+  corresponds to the location you want put the piece in. It also
+  exits the help or "redraws" the board.
+*/
 void keyPressed(){
     if (key == 'n') setup();
+    if (!winner && numTurns < 42 && !help){
+	if (key == '1'){
+	    clickLoc = 100;
+	    centerX();
+	    if (heightY())addPiece();
+	}
+	if (key == '2'){
+	    clickLoc = 200;
+	    centerX();
+	    if (heightY())addPiece();
+	}
+	if (key == '3'){
+	    clickLoc = 300;
+	    centerX();
+	    if (heightY())addPiece();
+	}
+	if (key == '4'){
+	    clickLoc = 400;
+	    centerX();
+	    if (heightY())addPiece();
+	}
+	if (key == '5'){
+	    clickLoc = 500;
+	    centerX();
+	    if (heightY())addPiece();
+	}
+	if (key == '6'){
+	    clickLoc = 600;
+	    centerX();
+	    if (heightY())addPiece();
+	}
+	if (key == '7'){
+	    clickLoc = 700;
+	    centerX();
+	    if (heightY())addPiece();
+	}
+	checkWin();
+    }
+    if (key == 'h'){
+	showHelp();
+    }
+    if (key == 'x'){
+	reDraw();
+    }
 }
 // it continously shows the winner if any of the conditions described above
 void draw(){
-    showWin();
+    if (!help){
+	checkWin();
+	showWin();
+    }
 }

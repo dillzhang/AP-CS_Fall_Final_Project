@@ -37,4 +37,4 @@ Change Log
 | 2014-12-24 | SWL          | Added graphics to show the winner in a clearer fashion |
 | 2014-12-25 | DZ           | Able to flash colors and keep original shape |
 | 2014-12-25 | DZ           | Flashing colors change back to original color after slight delay | 
-| 2014-12-27 | SWL          | Added help menu onto Connect 4. Also created the background for Trouble. |
+| 2014-12-27 | SWL          | Added help menu onto Connect 4 and made it playable with just the keyboard keys. Also created the background for Trouble. |

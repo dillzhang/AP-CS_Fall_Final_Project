@@ -15,4 +15,9 @@ void setup(){
   noFill();
   stroke(0);
   ellipse(400,400,800,800);
+  fill(255);
+  arc(450,400,550,575,-QUARTER_PI,QUARTER_PI);
+  arc(400,450,550,575,QUARTER_PI,(3)*QUARTER_PI);
+  arc(350,400,550,575,3*QUARTER_PI,5*QUARTER_PI);
+  arc(400,350,550,575,5*QUARTER_PI,7*QUARTER_PI);
 }

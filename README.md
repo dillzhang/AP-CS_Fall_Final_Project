@@ -10,7 +10,7 @@ Sammi Wu Leung & Dillon Zhang (Period 2)
 Project
 =======
 Classic Board Games Reborn on the Computer through Processing
-- [ ] Connect 4
+- [X] Connect 4 -> Completed by SWL
 - [ ] Simon Says
 - [ ] Battleship
 - [ ] Go
@@ -38,3 +38,4 @@ Change Log
 | 2014-12-25 | DZ           | Able to flash colors and keep original shape |
 | 2014-12-25 | DZ           | Flashing colors change back to original color after slight delay | 
 | 2014-12-27 | SWL          | Added help menu onto Connect 4 and made it playable with just the keyboard keys. Also created the background for Trouble. |
+| 2014-12-28 | DZ           | Added level creation, Encountering delay issues with visuals - Looking for solutions |

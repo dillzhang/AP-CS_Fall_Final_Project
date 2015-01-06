@@ -20,4 +20,12 @@ void setup(){
   arc(400,450,550,575,QUARTER_PI,(3)*QUARTER_PI);
   arc(350,400,550,575,3*QUARTER_PI,5*QUARTER_PI);
   arc(400,350,550,575,5*QUARTER_PI,7*QUARTER_PI);
+  ellipse(770,400,40,40);
+  ellipse(757,496,40,40);
+  ellipse(720,585,40,40);
+  ellipse(662,662,40,40);
+  ellipse(585,720,40,40);
+  ellipse(496,757,40,40);
+  ellipse(400,770,40,40);
+  
 }

@@ -41,3 +41,5 @@ Change Log
 | 2014-12-28 | DZ           | Added level creation, Encountering delay issues with visuals - Looking for solutions |
 | 2015-01-05 | DZ           | Added level creation, Resolved timing issue |
 | 2015-01-05 | SWL          | Figured out how to evenly space circles around board |
+| 2015-01-06 | SWL          | Finished the board & background for Trouble |
+

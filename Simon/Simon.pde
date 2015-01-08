@@ -6,10 +6,11 @@ private Random rand = new Random();
 //For flashing timing
 private int redClick = millis(), greenClick = millis(), blueClick = millis(), yellowClick = millis();
 private boolean redClicked = false, greenClicked = false, blueClicked = false, yellowClicked = false;
+
 //Game Play
 private ArrayList<Integer> computermoves = new ArrayList<Integer>(), playermoves = new ArrayList<Integer>();
 private int levellength = 3, leveldelay = millis();
-private boolean leveling = false, loser = false;
+private boolean leveling = false, levelup = false, newgame = true;
 
 //Replay Function
 private boolean replaying = false;
@@ -17,14 +18,18 @@ private ArrayList<Integer> playing;
 private int location, replayDelay = millis();
 
 void setup() {
-
-  //Board Setup
   size(800, 800);
-  background(204, 204, 204);
+  background(255,255,255);
+  textAlign(CENTER,CENTER);
+  fill(0,0,0);
+  textSize(60);
+  text("Welcome to Simon!",400,100);
+  text("Click anywhere to start!",400,700);
+}
 
-  fill(255, 255, 255);
-  rect(0, 0, 20, 20);
-  rect(20,0,20,20);
+void setupGame() {
+  //Board Setup
+  background(204, 204, 204);
 
   fill(0, 0, 0);
   ellipse(400, 400, 790, 790);
@@ -42,17 +47,21 @@ void setup() {
   arc(410, 390, 730, 730, PI+HALF_PI, 2*PI);
 
   drawCenter();
-
-  //Game Play Setup
 }
 
 void mouseClicked() {
-  if (mouseX < 20 && mouseY < 20) {
+  if (newgame) {
+    setupGame();
+    levellength = 3;
+    computermoves = new ArrayList<Integer>();
     createlevel();
-  } else if (mouseX < 40 && mouseY < 20) {
-    drawX();
-    //replay(computermoves);
-  }else if (mouseX > 400 && mouseY > 400) {
+    newgame = false;
+  } else if (levelup) {
+    setupGame();
+    levellength += 1;
+    createlevel();
+    levelup = false;
+  } else if (mouseX > 400 && mouseY > 400) {
     flashRed();
     playermoves.add(0);
   } else if (mouseX < 400 && mouseY > 400) {
@@ -96,7 +105,7 @@ void draw() {
     yellowClicked = false;
   }
   
-  if (leveling && leveldelay + 1000 < millis()) {
+  if (leveling && leveldelay <= millis()) {
     addStep();
   }
   
@@ -107,6 +116,7 @@ void draw() {
   if (playermoves.size() >= levellength) {
     if (checkVictory()) {
       drawCheck();
+      levelup = true;
     } else {
       drawX();
     }
@@ -179,8 +189,10 @@ private void addStep() {
   if (computermoves.size() < levellength){
     int move = rand.nextInt(4);
     computermoves.add(move);
-    playInt(move);
     leveldelay = millis();
+  } else {
+    replay(computermoves);
+    leveling = false;
   }
 }
 
@@ -206,8 +218,14 @@ private void replay() {
 }
 
 private void drawCheck() {
+  fill(0, 0, 0);
+  rect(0, 0, 800, 800);
+
+  fill(204, 204, 204);
+  ellipse(400, 400, 350, 350);
+  
   pushMatrix();
-  translate(420, 320);
+  translate(420, 290);
   rotate(radians(45));
   fill(0,255,0);
   strokeWeight(10);
@@ -218,14 +236,25 @@ private void drawCheck() {
   stroke(0);
   strokeWeight(1);
   popMatrix();
+  
+  fill(0);
+  textSize(35);
+  textAlign(CENTER, CENTER);
+  text("Level Complete", 400, 460);
+  
+  fill(255,255,255);
+  textSize(60);
+  textAlign(CENTER,CENTER);
+  text("Click anywhere",400,150);
+  text("to continue",400,650);
 }
 
 private void drawX() {
   fill(0, 0, 0);
-  ellipse(400, 400, 350, 350);
+  rect(0, 0, 800, 800);
 
   fill(204, 204, 204);
-  ellipse(400, 400, 310, 310);
+  ellipse(400, 400, 350, 350);
   
   pushMatrix();
   translate(400,280);
@@ -241,9 +270,18 @@ private void drawX() {
   popMatrix();
 
   fill(0);
-  textSize(40);
+  textSize(35);
   textAlign(CENTER, CENTER);
   text("You Lose", 400, 460);
+  
+  fill(255,255,255);
+  textSize(60);
+  textAlign(CENTER,CENTER);
+  text("Congratulations!",400,150);
+  text("You made it to level " + (levellength - 2),400,650);
+  textSize(20);
+  text("Click anywhere to start a new game",400,750);
+  newgame = true;
 }
   
   

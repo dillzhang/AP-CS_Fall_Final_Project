@@ -33,7 +33,7 @@ Change Log
 | 2014-12-23 | DZ           | Started Project Simon |
 | 2014-12-23 | DZ           | Implemented Flash functions |
 | 2014-12-23 | SWL          | Started Project Connect 4 |
-| 2014-12-23 | SWL          | Finished basics for Connect 4 |
+| 2014-12-23 | SWL          | *Finished* basics for Connect 4 |
 | 2014-12-24 | SWL          | Added graphics to show the winner in a clearer fashion |
 | 2014-12-25 | DZ           | Able to flash colors and keep original shape |
 | 2014-12-25 | DZ           | Flashing colors change back to original color after slight delay | 
@@ -41,8 +41,8 @@ Change Log
 | 2014-12-28 | DZ           | Added level creation, Encountering delay issues with visuals - Looking for solutions |
 | 2015-01-05 | DZ           | Added level creation, Resolved timing issue |
 | 2015-01-05 | SWL          | Figured out how to evenly space circles around board |
-| 2015-01-06 | SWL          | Finished the board & background for Trouble |
+| 2015-01-06 | SWL          | Created the board & background for Trouble |
 | 2015-01-06 | DZ           | Added user input recording and win checker |
 | 2015-01-07 | DZ           | Added Visual for losing and winning |
 | 2015-01-07 | SWL          | Added random number flasher and number picker |
-
+| 2015-01-08 | DZ           | *Finished* Game, Added Win, Lose, and Start Screen - May add sound later |

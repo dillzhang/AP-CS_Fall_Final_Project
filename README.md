@@ -44,3 +44,5 @@ Change Log
 | 2015-01-06 | SWL          | Finished the board & background for Trouble |
 | 2015-01-06 | DZ           | Added user input recording and win checker |
 | 2015-01-07 | DZ           | Added Visual for losing and winning |
+| 2015-01-07 | SWL          | Added random number flasher and number picker |
+

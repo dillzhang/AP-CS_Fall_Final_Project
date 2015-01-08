@@ -43,3 +43,4 @@ Change Log
 | 2015-01-05 | SWL          | Figured out how to evenly space circles around board |
 | 2015-01-06 | SWL          | Finished the board & background for Trouble |
 | 2015-01-06 | DZ           | Added user input recording and win checker |
+| 2015-01-07 | DZ           | Added Visual for losing and winning |

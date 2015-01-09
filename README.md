@@ -11,8 +11,9 @@ Project
 =======
 Classic Board Games Reborn on the Computer through Processing
 - [X] Connect 4 -> Completed by SWL
-- [ ] Simon Says
+- [X] Simon Says -> Completed by DZ
 - [ ] Battleship
+- [ ] Trouble
 - [ ] Go
 - [ ] Chess
 - [ ] Checker
@@ -46,3 +47,5 @@ Change Log
 | 2015-01-07 | DZ           | Added Visual for losing and winning |
 | 2015-01-07 | SWL          | Added random number flasher and number picker |
 | 2015-01-08 | DZ           | *Finished* Game, Added Win, Lose, and Start Screen - May add sound later |
+| 2015-01-08 | SWL          | Added S for start postiion & preliminary prompt menu |
+

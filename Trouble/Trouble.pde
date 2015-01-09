@@ -55,6 +55,9 @@ void setup(){
     arc(350,400,550,575,3*QUARTER_PI,5*QUARTER_PI);
     arc(400,350,550,575,5*QUARTER_PI,7*QUARTER_PI);
     blankEllipse();
+    PFont font;
+    font = createFont("bubble.ttf",10);
+    textFont(font);
 }
 
 private void blankEllipse(){
@@ -109,6 +112,21 @@ private void showRoll(){
     text("" + roll,350,450);
 }
 
+private void promptNewGame(){
+  fill(0);
+  rect(0,0,800,800);
+  fill(255);
+  textAlign(CENTER,TOP);
+  textSize(100);
+  text("TROUBLE",400,0);
+  textSize(50);
+  fill(230,230,0);
+  text("Start a New Game",400,110);
+  fill(255);
+  text("How many players are playing?",400,170);
+  text("1   2   3   4",400,230);
+}
+
 void mouseClicked(){
     if (dist(mouseX,mouseY,400,400)<= 100){
 	roll = r.nextInt(6) + 1;
@@ -117,6 +135,9 @@ void mouseClicked(){
     }
 }
 
+void keyPressed(){
+  if (key == 's') promptNewGame();
+}
 void draw(){
     if (second() < (time + 2) && clicked) flashR();
     else if (clicked) showRoll();

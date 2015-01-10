@@ -48,4 +48,4 @@ Change Log
 | 2015-01-07 | SWL          | Added random number flasher and number picker |
 | 2015-01-08 | DZ           | *Finished* Game, Added Win, Lose, and Start Screen - May add sound later |
 | 2015-01-08 | SWL          | Added S for start postiion & preliminary prompt menu |
-
+| 2015-01-09 | DZ           | Added startscreen design, beep tones for four buttons, victory and lose sounds to Simon |

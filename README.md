@@ -51,3 +51,4 @@ Change Log
 | 2015-01-09 | DZ           | Added startscreen design, beep tones for four buttons, victory and lose sounds to Simon |
 | 2015-01-11 | SWL          | Finished startscreen |
 | 2015-01-12 | DZ           | Added Team Name |
+| 2015-01-12 | DZ           | Fixed screen between levels, prevent clicking on level setup |

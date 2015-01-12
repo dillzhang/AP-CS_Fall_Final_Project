@@ -99,16 +99,16 @@ void mouseClicked() {
     createlevel();
     //victory.rewind();
     levelup = false;
-  } else if (mouseX > 400 && mouseY > 400) {
+  } else if (mouseX > 400 && mouseY > 400 && !leveling && !replaying) {
     flashRed();
     playermoves.add(0);
-  } else if (mouseX < 400 && mouseY > 400) {
+  } else if (mouseX < 400 && mouseY > 400 && !leveling && !replaying) {
     flashGreen();
     playermoves.add(1);
-  } else if (mouseX < 400 && mouseY < 400) {
+  } else if (mouseX < 400 && mouseY < 400 && !leveling && !replaying) {
     flashBlue();
     playermoves.add(2);
-  } else if (mouseX > 400 && mouseY < 400) {
+  } else if (mouseX > 400 && mouseY < 400 && !leveling && !replaying) {
     flashYellow();
     playermoves.add(3);
   }
@@ -269,13 +269,14 @@ private void drawCheck() {
   
   background(0, 0, 0);
 
-  fill(204, 204, 204);
-  ellipse(400, 400, 350, 350);
+  //fill(204, 204, 204);
+  //ellipse(400, 400, 350, 350);
   
   pushMatrix();
   translate(420, 290);
   rotate(radians(45));
   fill(0,255,0);
+  stroke(255,255,255);
   strokeWeight(10);
   rect(0, 80, 80, 40);
   rect(41,0,40,120);
@@ -285,13 +286,14 @@ private void drawCheck() {
   strokeWeight(1);
   popMatrix();
   
-  fill(0);
+  fill(255,255,255);
   textSize(35);
   textAlign(CENTER, CENTER);
   text("Level Complete", 400, 460);
+  fill(0, 0, 0);
   
   fill(255,255,255);
-  textSize(60);
+  textSize(80);
   textAlign(CENTER,CENTER);
   text("Click anywhere",400,150);
   text("to continue",400,650);
@@ -304,13 +306,14 @@ private void drawX() {
   
   background(0, 0, 0);
 
-  fill(204, 204, 204);
-  ellipse(400, 400, 350, 350);
+  //fill(204, 204, 204);
+  //ellipse(400, 400, 350, 350);
   
   pushMatrix();
   translate(400,280);
   rotate(radians(45));
   fill(255,0,0);
+  stroke(255,255,255);
   strokeWeight(10);
   rect(0,40,120,40);
   rect(41,0,40,120);
@@ -320,13 +323,14 @@ private void drawX() {
   strokeWeight(1);
   popMatrix();
 
-  fill(0);
+  fill(255,255,255);
   textSize(35);
   textAlign(CENTER, CENTER);
   text("You Lose", 400, 460);
+  fill(0, 0, 0);
   
   fill(255,255,255);
-  textSize(60);
+  textSize(80);
   textAlign(CENTER,CENTER);
   text("Congratulations!",400,150);
   text("You made it to level " + (levellength - 2),400,650);

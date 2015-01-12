@@ -35,9 +35,9 @@ private int[][] pInfo = new int[4][5];
 void setup(){
     size(800,800);
     frameRate(30);
-    PFont font;
-    font = createFont("bubble.ttf",200);
-    textFont(font);
+    //PFont font;
+    //font = createFont("bubble.ttf",200);
+    //textFont(font);
     newGame = true;
     for (int x = 0; x < 4; x++){
 	for (int y = 0; y < 5; y++){

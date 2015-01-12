@@ -1,5 +1,5 @@
-AP-CS_Final_Project
-===================
+AP-CS_Final_Project: Bob's Board Games
+======================================
 
 Final Project for AP Computer Science Fall 2014
 
@@ -50,4 +50,4 @@ Change Log
 | 2015-01-08 | SWL          | Added S for start postiion & preliminary prompt menu |
 | 2015-01-09 | DZ           | Added startscreen design, beep tones for four buttons, victory and lose sounds to Simon |
 | 2015-01-11 | SWL          | Finished startscreen |
-
+| 2015-01-12 | DZ           | Added Team Name |

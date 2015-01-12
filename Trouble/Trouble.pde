@@ -35,9 +35,9 @@ private int[][] pInfo = new int[4][5];
 void setup(){
     size(800,800);
     frameRate(30);
-    //PFont font;
-    //font = createFont("bubble.ttf",200);
-    //textFont(font);
+    PFont font;
+    font = createFont("bubble.ttf",200);
+    textFont(font);
     newGame = true;
     for (int x = 0; x < 4; x++){
 	for (int y = 0; y < 5; y++){
@@ -139,19 +139,6 @@ private void promptNewGame(){
     fill(15,140,20);
     rect(45,295,340,200);
     fill(255);
-    text("N/A",212,285);
-    fill(255,215,20);
-    rect(415,295,340,200);
-    fill(255);
-    text("N/A",590,285);
-    fill(200,0,10);
-    rect(45,525,340,200);
-    fill(255);
-    text("N/A",212,520);
-    fill(0,50,220);
-    rect(415,525,340,200);
-    fill(255);
-    text("N/A",590,520);
     textSize(60);
     text("DONE",400,725);
     stroke(255);
@@ -162,81 +149,138 @@ private void promptNewGame(){
 }
 
 private void choosePlayer(int player){
+    
+    if (player == 1){
+	
+        if (pInfo[0][0] == -1){
+	    pInfo[0][0] = 0;
+	    
+        
+        } else if (pInfo[0][0] == 0){
+	    
+	    pInfo[0][0] = 1;
+        } else if (pInfo[0][0] == 1){
+	    
+	    pInfo[0][0] = -1;
+        }
+    }
+    if (player == 2){
+	
+        if (pInfo[1][0] == -1){
+	    pInfo[1][0] = 0;
+	    
+        
+        } else if (pInfo[1][0] == 0){
+	    
+	    pInfo[1][0] = 1;
+        } else if (pInfo[1][0] == 1){
+	    
+	    pInfo[1][0] = -1;
+        }
+    }
+    if (player == 3){
+	
+	if (pInfo[2][0] == -1){
+	    
+	    text("AI",210,490);
+        
+        } else if (pInfo[2][0] == 0){
+	    
+	    pInfo[2][0] = 1;
+        } else if (pInfo[2][0] == 1){
+	    
+	    pInfo[2][0] = -1;
+        }
+    }
+    if (player == 4){
+	
+	if (pInfo[3][0] == -1){
+	    pInfo[3][0] = 0;
+        
+        } else if (pInfo[3][0] == 0){
+	    pInfo[3][0] = 1;
+        } else if (pInfo[3][0] == 1){
+	    pInfo[3][0] = -1;
+        }
+    }
+}
+
+private void showPlayers(){
     fill(255);
     fill(0,50,220);
     stroke(0);
-    if (player == 1){
+    
 	fill(15,140,20);
 	rect(45,295,340,200);
         fill(255);
         textSize(200);
         if (pInfo[0][0] == -1){
-	    pInfo[0][0] = 0;
+	    
 	    text("AI",210,255);
         
         } else if (pInfo[0][0] == 0){
 	    text("P",210,255);
-	    pInfo[0][0] = 1;
+	    
         } else if (pInfo[0][0] == 1){
 	    textSize(150);
 	    text("N/A",212,285);
-	    pInfo[0][0] = -1;
+	   
         }
-    }
-    if (player == 2){
+    
+    
 	fill(255,215,20);
 	rect(415,295,340,200);
 	fill(255);
 	textSize(200);
         if (pInfo[1][0] == -1){
-	    pInfo[1][0] = 0;
+	    
 	    text("AI",590,255);
         
         } else if (pInfo[1][0] == 0){
 	    text("P",590,255);
-	    pInfo[1][0] = 1;
+	    
         } else if (pInfo[1][0] == 1){
 	    textSize(150);
             text("N/A",590,285);
-	    pInfo[1][0] = -1;
+	    
         }
-    }
-    if (player == 3){
+    
+    
 	fill(200,0,10);
 	rect(45,525,340,200);
 	fill(255);
         textSize(200);
 	if (pInfo[2][0] == -1){
-	    pInfo[2][0] = 0;
+	    
 	    text("AI",210,490);
         
         } else if (pInfo[2][0] == 0){
 	    text("P",210,490);
-	    pInfo[2][0] = 1;
+	    
         } else if (pInfo[2][0] == 1){
 	    textSize(150);
 	    text("N/A",212,520);
-	    pInfo[2][0] = -1;
+	    
         }
-    }
-    if (player == 4){
+    
+    
 	fill(0,50,220);
 	rect(415,525,340,200);
 	fill(255);
 	textSize(200);
 	if (pInfo[3][0] == -1){
-	    pInfo[3][0] = 0;
+	    
 	    text("AI",590,490);
         
         } else if (pInfo[3][0] == 0){
 	    text("P",590,490);
-	    pInfo[3][0] = 1;
+	   
         } else if (pInfo[3][0] == 1){
 	    textSize(150);
 	    text("N/A",590,520);
-	    pInfo[3][0] = -1;
+	    
         }
-    }
+    
 }
 void mouseClicked(){
     if (dist(mouseX,mouseY,400,400)<= 100 && !newGame && !choose){
@@ -264,9 +308,10 @@ void mouseClicked(){
 }
 
 void keyPressed(){
-    if (key == 's') promptNewGame();
+    if (key == 's') setup();
 }
 void draw(){
-    if (second() < (time + 2) && clicked) flashR();
+    if (second() < (time + 2) && clicked && !choose & !newGame) flashR();
     else if (clicked) showRoll();
+    if (choose && newGame) showPlayers();
 }

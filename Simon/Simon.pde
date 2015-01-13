@@ -115,7 +115,7 @@ void mouseClicked() {
 }
 
 void draw() {
-  if (redClick + 700 < millis() && redClicked && playermoves.size() < levellength) {
+  if (redClick + 600 < millis() && redClicked && playermoves.size() < levellength) {
     fill(255, 0, 0);
     arc(410, 410, 730, 730, 0, HALF_PI); 
     drawCenter();
@@ -123,7 +123,7 @@ void draw() {
     redClicked = false;
   }
 
-  if (greenClick + 700 < millis() && greenClicked && playermoves.size() < levellength) {
+  if (greenClick + 600 < millis() && greenClicked && playermoves.size() < levellength) {
     fill(0, 255, 0);
     arc(390, 410, 730, 730, HALF_PI, PI);
     drawCenter();
@@ -131,7 +131,7 @@ void draw() {
     greenClicked = false;
   }
 
-  if (blueClick + 700 < millis() && blueClicked && playermoves.size() < levellength) {
+  if (blueClick + 600 < millis() && blueClicked && playermoves.size() < levellength) {
     fill(0, 0, 255);
     arc(390, 390, 730, 730, PI, PI+HALF_PI);
     drawCenter();
@@ -139,7 +139,7 @@ void draw() {
     blueClicked = false;
   }
 
-  if (yellowClick + 700 < millis() && yellowClicked && playermoves.size() < levellength) {
+  if (yellowClick + 600 < millis() && yellowClicked && playermoves.size() < levellength) {
     fill(255, 255, 0);
     arc(410, 390, 730, 730, PI+HALF_PI, 2*PI);
     drawCenter();
@@ -151,7 +151,7 @@ void draw() {
     addStep();
   }
   
-  if (replaying && replayDelay + 900 < millis()) {
+  if (replaying && replayDelay + 800 < millis()) {
     replay();
   }
   
@@ -293,7 +293,7 @@ private void drawCheck() {
   fill(0, 0, 0);
   
   fill(255,255,255);
-  textSize(80);
+  textSize(60);
   textAlign(CENTER,CENTER);
   text("Click anywhere",400,150);
   text("to continue",400,650);
@@ -330,7 +330,7 @@ private void drawX() {
   fill(0, 0, 0);
   
   fill(255,255,255);
-  textSize(80);
+  textSize(60);
   textAlign(CENTER,CENTER);
   text("Congratulations!",400,150);
   text("You made it to level " + (levellength - 2),400,650);

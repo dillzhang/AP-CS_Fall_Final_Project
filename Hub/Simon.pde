@@ -1,7 +1,7 @@
 import java.util.Random;
 import ddf.minim.*;
 
-class Simon {
+class Simon extends Game {
   
   // INSTANCE VARIABLES ==================================================================================================================================================================================
   
@@ -16,14 +16,14 @@ class Simon {
   private boolean redClicked = false, greenClicked = false, blueClicked = false, yellowClicked = false;
 
   //Game Play
-  private ArrayList<Integer> computermoves = new ArrayList<Integer>(), playermoves = new ArrayList<Integer>();
-  private int levellength = 3, leveldelay = millis();
-  private boolean leveling = false, levelup = false, newgame = true;
+  private ArrayList<Integer> computermoves, playermoves;
+  private int levellength, leveldelay;
+  private boolean leveling, levelup, newgame;
 
   //Replay Function
-  private boolean replaying = false;
+  private boolean replaying;
   private ArrayList<Integer> playing;
-  private int location, replayDelay = millis();
+  private int location, replayDelay;
 
   // Setup() =============================================================================================================================================================================================
 
@@ -65,63 +65,22 @@ class Simon {
     beep4 = loader.loadFile("beep4.mp3");
     victory = loader.loadFile("victory.mp3");
     lose = loader.loadFile("lose.mp3");
-  }
-
-  // setupGame() =========================================================================================================================================================================================
-
-  void setupGame() {
-    //Board Setup
-    background(204, 204, 204);
+    
+    //Resets Entire GAME
+    //Game Play
+    computermoves = new ArrayList<Integer>();
+    playermoves = new ArrayList<Integer>();
+    levellength = 3; 
+    leveldelay = millis();
+    leveling = false;
+    levelup = false;
+    newgame = true;
   
-    fill(0, 0, 0);
-    ellipse(400, 400, 790, 790);
-  
-    fill(255, 0, 0);
-    arc(410, 410, 730, 730, 0, HALF_PI);
-
-    fill(0, 255, 0);
-    arc(390, 410, 730, 730, HALF_PI, PI);
-  
-    fill(0, 0, 255);
-    arc(390, 390, 730, 730, PI, PI+HALF_PI);
-
-    fill(255, 255, 0);
-    arc(410, 390, 730, 730, PI+HALF_PI, 2*PI);
-
-    drawCenter();
+    //Replay Function
+    replaying = false;
+    replayDelay = millis();
   }
-
-  // mouseClicked() ======================================================================================================================================================================================
-
-  void mouseClicked() {
-    if (newgame) {
-      setupGame();
-      levellength = 3;
-      computermoves = new ArrayList<Integer>();
-      createlevel();
-      //lose.rewind();
-      newgame = false;
-    } else if (levelup) {
-      setupGame();
-      levellength += 1;
-      createlevel();
-      //victory.rewind();
-      levelup = false;
-    } else if (mouseX > 400 && mouseY > 400 && !leveling && !replaying) {
-      flashRed();
-      playermoves.add(0);
-    } else if (mouseX < 400 && mouseY > 400 && !leveling && !replaying) {
-      flashGreen();
-      playermoves.add(1);
-    } else if (mouseX < 400 && mouseY < 400 && !leveling && !replaying) {
-      flashBlue();
-      playermoves.add(2);
-    } else if (mouseX > 400 && mouseY < 400 && !leveling && !replaying) {
-      flashYellow();
-      playermoves.add(3);
-    }
-  }
-
+  
   // draw() ==============================================================================================================================================================================================
 
   void draw() {
@@ -175,6 +134,39 @@ class Simon {
       }
     }
   }
+
+  // mouseClicked() ======================================================================================================================================================================================
+
+  void mouseClicked() {
+    if (newgame) {
+      setupGame();
+      levellength = 3;
+      computermoves = new ArrayList<Integer>();
+      createlevel();
+      //lose.rewind();
+      newgame = false;
+    } else if (levelup) {
+      setupGame();
+      levellength += 1;
+      createlevel();
+      //victory.rewind();
+      levelup = false;
+    } else if (mouseX > 720 && mouseY > 780) {
+      choice = 4;
+    } else if (mouseX > 400 && mouseY > 400 && !leveling && !replaying && !newgame) {
+      flashRed();
+      playermoves.add(0);
+    }  else if (mouseX < 400 && mouseY > 400 && !leveling && !replaying && !newgame) {
+      flashGreen();
+      playermoves.add(1);
+    } else if (mouseX < 400 && mouseY < 400 && !leveling && !replaying && !newgame) {
+      flashBlue();
+      playermoves.add(2);
+    } else if (mouseX > 400 && mouseY < 400 && !leveling && !replaying && !newgame) {
+      flashYellow();
+      playermoves.add(3);
+    }
+  }
   
   // keyPressed() ========================================================================================================================================================================================
   
@@ -184,6 +176,37 @@ class Simon {
   
   // METHODS =============================================================================================================================================================================================
 
+  //~~ setupGame() ~~
+  void setupGame() {
+    //Board Setup
+    background(204, 204, 204);
+  
+    fill(0, 0, 0);
+    ellipse(400, 400, 790, 790);
+  
+    fill(255, 0, 0);
+    arc(410, 410, 730, 730, 0, HALF_PI);
+
+    fill(0, 255, 0);
+    arc(390, 410, 730, 730, HALF_PI, PI);
+  
+    fill(0, 0, 255);
+    arc(390, 390, 730, 730, PI, PI+HALF_PI);
+
+    fill(255, 255, 0);
+    arc(410, 390, 730, 730, PI+HALF_PI, 2*PI);
+
+    drawCenter();
+    
+    fill(255,255,255);
+    rect(720,780,80,20);
+    textSize(10);
+    fill(0,0,0);
+    textAlign(CENTER,CENTER);
+    text("Back to Hub",760,790);
+  }
+
+  //~~ drawCenter() ~~
   void drawCenter() {
     fill(0, 0, 0);
     ellipse(400, 400, 350, 350);

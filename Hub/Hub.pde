@@ -1,16 +1,26 @@
 import ddf.minim.*;
 
+// INSTANCE VARIABLES ====================================================================================================================================================================================
+
 private Minim loader;
 
-//private Connect connect = new Connect();
-private Simon simon = new Simon();
-//private Trouble trouble = new Trouble();
+//private Connect connect;
+private Simon simon;
+//private Trouble trouble;
+//private ??? ???;
 
 public int choice = 4;
+
+// Setup() =============================================================================================================================================================================================
+
 void setup() {
   loader = new Minim(this);
   
   if (choice == 4) { 
+    
+    //connect = new Connect();
+    simon = new Simon();
+    //trouble = new Trouble();
     
     size(800,800);
     background(0,0,0);
@@ -77,6 +87,7 @@ void setup() {
    ellipse(650, 180, 40, 40);
    
    text("Trouble!",200,750);
+   
    text("COMING SOON",600,750);
    
   } else if (choice == 0) {
@@ -89,6 +100,24 @@ void setup() {
     //.setup()
   }
 }
+
+// draw() ================================================================================================================================================================================================
+
+void draw() {
+  if (choice == 4) {
+    setup();
+  } else if (choice == 0) {
+    //connect.draw();
+  } else if (choice == 1) {
+    simon.draw();
+  } else if (choice == 2) {
+    //trouble.draw();
+  } else if (choice == 3) {
+    //.draw()
+  }
+}
+
+// mouseClicked() ========================================================================================================================================================================================
 
 void mouseClicked() {
   if (choice == 4) {
@@ -116,11 +145,13 @@ void mouseClicked() {
   }
 }
 
+// keyPressed() ==========================================================================================================================================================================================
+
+
 void keyPressed() {
   if (choice == 4) {
-    if (key == '0') {
-      
-    } else if (key == '1') {
+    
+    if (key == '1') {
       choice = 0;
       setup();
     } else if (key == '2') {
@@ -133,6 +164,7 @@ void keyPressed() {
       //choice = 3;
       //setup();
     }
+    
   } else if (choice == 0) {
     //connect.keyPressed();
   } else if (choice == 1) {
@@ -144,18 +176,5 @@ void keyPressed() {
   }
 }
 
-void draw() {
-  if (choice == 4) {
-    
-  } else if (choice == 0) {
-    //connect.draw();
-  } else if (choice == 1) {
-    simon.draw();
-  } else if (choice == 2) {
-    //trouble.draw();
-  } else if (choice == 3) {
-    //.draw()
-  }
-}
 
 

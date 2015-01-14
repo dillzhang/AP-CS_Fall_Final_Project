@@ -41,7 +41,7 @@ void setup(){
     newGame = true;
     for (int x = 0; x < 4; x++){
 	for (int y = 0; y < 5; y++){
-	    if (y == 0) pInfo[x][y] = -1;
+	    if (y == 0) pInfo[x][y] = 1;
 	    else pInfo[x][y] = 0;
 	}
     }
@@ -182,7 +182,7 @@ private void choosePlayer(int player){
 	
 	if (pInfo[2][0] == -1){
 	    
-	    text("AI",210,490);
+	    pInfo[2][0] = 0;
         
         } else if (pInfo[2][0] == 0){
 	    

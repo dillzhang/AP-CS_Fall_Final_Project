@@ -40,7 +40,7 @@ void setup() {
    
    fill(204,204,204);
    textSize(25);
-   text("Made by Sammy Wu Leung & Dillon Zhang",400,420);
+   text("Made by Sammi Wu Leung & Dillon Zhang",400,420);
    
    fill(150,150,150);
    textSize(10);

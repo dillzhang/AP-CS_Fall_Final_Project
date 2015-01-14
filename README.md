@@ -22,6 +22,9 @@ Classic Board Games Reborn on the Computer through Processing
 The number of games will depend on what time allows.
 If time allows, AI will be added to some games to allow for single and multiplayer.
 
+Link games together with a central HUB with Processing
+- [ ] Create HUB to link games
+
 Usage
 =====
 WIP

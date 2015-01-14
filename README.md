@@ -57,3 +57,5 @@ Change Log
 | 2015-01-12 | DZ           | Fixed screen between levels, prevent clicking on level setup |
 | 2015-01-13 | DZ           | Created Hub, Wrote new version of simon as a class, Designed Hub, Connected Simon to Hub |
 | 2015-01-14 | DZ           | Created Abstract Game class for organization, Cleaned up Simon, Created pathway back to hub |
+| 2015-01-14 | SWL          | Created a startup screen for Connect 4 |
+

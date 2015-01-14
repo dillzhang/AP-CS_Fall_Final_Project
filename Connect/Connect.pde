@@ -1,4 +1,4 @@
-//~~~~~~~~~~~~~~~~~~~~~~~~~Instansce variables~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~Instance variables~~~~~~~~~~~~~~~~~~~~~~~~~
 
 private char[][] locations = new char[6][7];
 private int turn, clickLoc, addLoc, addCenter, addHeight;
@@ -6,22 +6,22 @@ private int numTurns = 0;
 private int wr1,wr2,wr3,wr4,wc1,wc2,wc3,wc4;
 private boolean winner = false;
 private boolean help = false;
+private boolean firstStart = true;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~The Setup~~~~~~~~~~~~~~~~~~~~~~~~~
 
 /*
   Setup creates canvas that the whole game is to be played in. 
   It resets all the instance variables that need to be reset 
-  in order to start a new game. It also creates the board,
-  the new game button, help button, and the Connect 4 title.
+  in order to start a new game. It also creates the startup screen
+  board, the new game button, help button, and/or the Connect 4 title
+  depending on whether it's the first startup of the game.
 */
 void setup(){  
     numTurns = 0;
     turn = 0;
     winner = false;
     help = false;
-    stroke(63,124,231);
-    background(63,124,231);
     size(800,800);
     for (int r = 0; r < 6; r++){
 	for (int c = 0; c < 7; c++){
@@ -30,30 +30,23 @@ void setup(){
 	    }
 	}
     }
-    fill(231,214,26);
-    rect(50,150,700,600);
-    textAlign(LEFT,BOTTOM);
-    textSize(100);
-    fill(255,255,255);
-    text("Connect Four",75, 105);
-    int x = 100;
-    int y = 200;
-    fill(63,124,231);
-    for (int r = 0; r < 6; r++){
-	for (int c = 0; c < 7; c++){
-	    ellipse(x,y,70,70);
-	    x += 100;
-	}  
-	x = 100;
-	y += 100;
+    if (!firstStart){
+	reDraw();
     }
-    stroke(255,255,255);
-    rect(70,110,138,30);
-    rect(625,110,65,30);
-    textSize(25);
-    fill(255,255,255);
-    text("New Game",75,139);
-    text("Help",630,139);
+    if (firstStart){
+	background(0);
+	textAlign(CENTER,TOP);
+	fill(255);
+	textSize(150);
+	text("Connect 4",400,10);
+	textSize(60);
+	text("Click Anywhere to Start",400,600);
+	PImage img;
+	img = loadImage("board.png");
+	image(img,225,250,350,300);
+    }
+    
+    
 }
 
 
@@ -90,11 +83,27 @@ private void showHelp(){
     text("Press x to exit the menu.",52,600);
 }
 
+
+
 /*
-  reDraw redraws the board if the help screen is called.
+  reDraw redraws the board when needed
 */
 private void reDraw(){
     help = false;
+    background(63,124,231);
+    rect(50,150,700,600);
+    textAlign(LEFT,BOTTOM);
+    textSize(100);
+    fill(255,255,255);
+    text("Connect Four",75, 105);
+    fill(63,124,231);
+    stroke(255);
+    rect(70,110,138,30);
+    rect(625,110,65,30);
+    textSize(25);
+    fill(255,255,255);
+    text("New Game",75,139);
+    text("Help",630,139);
     int backUp = turn;
     int backUp2 = numTurns;
     numTurns = 0;
@@ -349,7 +358,7 @@ private void showWin(){
   piece or if you pressed "new Game".
 */
 void mouseClicked(){
-    if (!winner && numTurns < 42 && !help){
+    if (!firstStart && !winner && numTurns < 42 && !help){
 	if (mouseX > 50 && mouseX < 750 && mouseY > 150){
 	    clickLoc = mouseX;
 	    centerX();
@@ -357,11 +366,15 @@ void mouseClicked(){
 	}
 	checkWin();
     }
-    if (mouseX > 70 && mouseX < 208 && mouseY > 110 && mouseY < 140){
+    if (!firstStart && mouseX > 70 && mouseX < 208 && mouseY > 110 && mouseY < 140){
 	setup();
     }
-    if (mouseX > 625 && mouseX < 700 && mouseY > 110 && mouseY < 140){
+    if (!firstStart && mouseX > 625 && mouseX < 700 && mouseY > 110 && mouseY < 140){
 	showHelp();
+    }
+    if (firstStart){
+	firstStart = false;
+	reDraw();
     }
 }
 /*
@@ -371,7 +384,7 @@ void mouseClicked(){
   exits the help or "redraws" the board.
 */
 void keyPressed(){
-    if (key == 'n') setup();
+    if (key == 'n' && !firstStart) setup();
     if (!winner && numTurns < 42 && !help){
 	if (key == '1'){
 	    clickLoc = 100;

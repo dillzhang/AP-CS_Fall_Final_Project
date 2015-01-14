@@ -52,3 +52,4 @@ Change Log
 | 2015-01-11 | SWL          | Finished startscreen |
 | 2015-01-12 | DZ           | Added Team Name |
 | 2015-01-12 | DZ           | Fixed screen between levels, prevent clicking on level setup |
+| 2015-01-13 | DZ           | Created Hub, Wrote new version of simon as a class, Designed Hub, Connected Simon to Hub |

@@ -1,8 +1,8 @@
 PImage logo;
 
 Board player1, player2;
-boolean settingUp = false, startScreen = false;
-int winner = -2;
+boolean startScreen, settingUp, playerChange;
+int winner;
 
 void setup() {
   logo = loadImage("battleshiplogo.png");
@@ -16,18 +16,36 @@ void setup() {
   text("Click anywhere to start!",400,700);
   
   image(logo,80,250,640,300);
+  
+  //Game Play
+  startScreen = true;
+  settingUp = true;
+  winner = -2;
+  playerChange = true;
 }
 
 void draw() {
   if (startScreen) {
+    
   } else if (settingUp) {
-  } else if (winner == -1) {
+    
     for (int i = 0; i < 2; i++) {
-      background(0,0,0);
-      image(logo,0,0);
+    
+    }
+    
+  } else if (winner == -1) {
+    
+    for (int i = 0; i < 2; i++) {
+      if(playerChange) {
+        background(0,0,0);
+        
+      } else {
+        
+      }
       
     }
-  }
+  
+}
 }
 
 void mouseClicked() {

@@ -71,10 +71,9 @@ private void drawBoard(){
     arc(350,400,550,575,3*QUARTER_PI,5*QUARTER_PI);
     arc(400,350,550,575,5*QUARTER_PI,7*QUARTER_PI);  
     fill(205);
-    stroke(205);
-    ellipse(400,400,200,200);
-    strokeWeight(5);
     stroke(0);
+    strokeWeight(5);
+    ellipse(400,400,200,200);
     for (int x = 0; x < basic.length; x++){
 	if (x > 23) fill(255,255,70);
 	if (x > 27) fill(0,90,255);
@@ -91,31 +90,6 @@ private void drawBoard(){
     text('S',130,150);
     fill(255,215,20);
     text('S',655,150);
-}
-
-private void flashR(){
-    int a = r.nextInt(6) + 1;
-    if (circle){
-	fill(0);
-	textSize(180);
-	text("" + a, 355,470);
-	circle = false;
-    } else {
-	fill(205);
-	stroke(205);
-	ellipse(400,400,200,200);
-	circle = true;
-    }
-}
-
-private void showRoll(){
-    clicked = false;
-    fill(205);
-    stroke(205);
-    ellipse(400,400,200,200);
-    fill(0);
-    textSize(180);
-    text("" + roll,355,470);
 }
 
 private void promptNewGame(){
@@ -138,150 +112,123 @@ private void promptNewGame(){
     textSize(150);
     fill(15,140,20);
     rect(45,295,340,200);
-    fill(255);
-    textSize(60);
-    text("DONE",400,725);
-    stroke(255);
-    noFill();
-    strokeWeight(5);
-    rect(300,735,200,60);
     choose = true;
 }
 
 private void choosePlayer(int player){
-    
-    if (player == 1){
-	
-        if (pInfo[0][0] == -1){
-	    pInfo[0][0] = 0;
-	    
-        
-        } else if (pInfo[0][0] == 0){
-	    
-	    pInfo[0][0] = 1;
-        } else if (pInfo[0][0] == 1){
-	    
-	    pInfo[0][0] = -1;
-        }
-    }
-    if (player == 2){
-	
-        if (pInfo[1][0] == -1){
-	    pInfo[1][0] = 0;
-	    
-        
-        } else if (pInfo[1][0] == 0){
-	    
-	    pInfo[1][0] = 1;
-        } else if (pInfo[1][0] == 1){
-	    
-	    pInfo[1][0] = -1;
-        }
-    }
-    if (player == 3){
-	
-	if (pInfo[2][0] == -1){
-	    
-	    pInfo[2][0] = 0;
-        
-        } else if (pInfo[2][0] == 0){
-	    
-	    pInfo[2][0] = 1;
-        } else if (pInfo[2][0] == 1){
-	    
-	    pInfo[2][0] = -1;
-        }
-    }
-    if (player == 4){
-	
-	if (pInfo[3][0] == -1){
-	    pInfo[3][0] = 0;
-        
-        } else if (pInfo[3][0] == 0){
-	    pInfo[3][0] = 1;
-        } else if (pInfo[3][0] == 1){
-	    pInfo[3][0] = -1;
-        }
+    int loc = player -1;
+    if (pInfo[loc][0] == -1){
+	pInfo[loc][0] = 0;
+    } else if (pInfo[loc][0] == 0){
+	pInfo[loc][0] = 1;
+    } else if (pInfo[loc][0] == 1){
+	pInfo[loc][0] = -1;
     }
 }
 
 private void showPlayers(){
-    fill(255);
-    fill(0,50,220);
     stroke(0);
-    
-	fill(15,140,20);
-	rect(45,295,340,200);
-        fill(255);
-        textSize(200);
-        if (pInfo[0][0] == -1){
-	    
-	    text("AI",210,255);
-        
-        } else if (pInfo[0][0] == 0){
-	    text("P",210,255);
-	    
-        } else if (pInfo[0][0] == 1){
-	    textSize(150);
-	    text("N/A",212,285);
-	   
-        }
-    
-    
-	fill(255,215,20);
-	rect(415,295,340,200);
+    fill(15,140,20);
+    rect(45,295,340,200);
+    fill(255);
+    textSize(200);
+    if (pInfo[0][0] == -1){
+	text("AI",210,255);
+    } else if (pInfo[0][0] == 0){
+	text("P",210,255);
+    } else if (pInfo[0][0] == 1){
+	textSize(150);
+	text("N/A",212,285);
+    }
+    fill(255,215,20);
+    rect(415,295,340,200);
+    fill(255);
+    textSize(200);
+    if (pInfo[1][0] == -1){
+	text("AI",590,255);
+    } else if (pInfo[1][0] == 0){
+	text("P",590,255);
+    } else if (pInfo[1][0] == 1){
+	textSize(150);
+	text("N/A",590,285);
+    }
+    fill(200,0,10);
+    rect(45,525,340,200);
+    fill(255);
+    textSize(200);
+    if (pInfo[2][0] == -1){
+	text("AI",210,490);
+    } else if (pInfo[2][0] == 0){
+	text("P",210,490);
+    } else if (pInfo[2][0] == 1){
+	textSize(150);
+	text("N/A",212,520);
+    }
+    fill(0,50,220);
+    rect(415,525,340,200);
+    fill(255);
+    textSize(200);
+    if (pInfo[3][0] == -1){
+	text("AI",590,490);
+    } else if (pInfo[3][0] == 0){
+	text("P",590,490);
+    } else if (pInfo[3][0] == 1){
+	textSize(150);
+	text("N/A",590,520);
+    }   
+    if (checkPlayer()){
 	fill(255);
-	textSize(200);
-        if (pInfo[1][0] == -1){
-	    
-	    text("AI",590,255);
-        
-        } else if (pInfo[1][0] == 0){
-	    text("P",590,255);
-	    
-        } else if (pInfo[1][0] == 1){
-	    textSize(150);
-            text("N/A",590,285);
-	    
-        }
-    
-    
-	fill(200,0,10);
-	rect(45,525,340,200);
-	fill(255);
-        textSize(200);
-	if (pInfo[2][0] == -1){
-	    
-	    text("AI",210,490);
-        
-        } else if (pInfo[2][0] == 0){
-	    text("P",210,490);
-	    
-        } else if (pInfo[2][0] == 1){
-	    textSize(150);
-	    text("N/A",212,520);
-	    
-        }
-    
-    
-	fill(0,50,220);
-	rect(415,525,340,200);
-	fill(255);
-	textSize(200);
-	if (pInfo[3][0] == -1){
-	    
-	    text("AI",590,490);
-        
-        } else if (pInfo[3][0] == 0){
-	    text("P",590,490);
-	   
-        } else if (pInfo[3][0] == 1){
-	    textSize(150);
-	    text("N/A",590,520);
-	    
-        }
-    
+	textSize(60);
+	text("DONE",400,725);
+	stroke(255);
+	noFill();
+	strokeWeight(5);
+	rect(300,735,200,60);
+    } else {
+	fill(0);
+	rect(300,735,200,60);
+    }
 }
+
+private boolean checkPlayer(){
+    int numP = 0;
+    int numAI = 0;
+    for (int p = 0; p < 4; p++){
+	if (pInfo[p][0] == 0) numP++;
+	if (pInfo[p][0] == -1) numAI++;
+    }
+    if (numP >= 2) return true;
+    if (numP >= 1 && numAI >= 1) return true;
+    return false;
+}
+
+private void flashR(){
+    int a = r.nextInt(6) + 1;
+    if (circle){
+	fill(0);
+	textSize(180);
+	text("" + a, 355,470);
+	circle = false;
+    } else {
+	fill(205);
+	stroke(0);
+        strokeWeight(5);
+	ellipse(400,400,200,200);
+	circle = true;
+    }
+}
+
+private void showRoll(){
+    clicked = false;
+    fill(205);
+    stroke(0);
+    strokeWeight(5);
+    ellipse(400,400,200,200);
+    fill(0);
+    textSize(180);
+    text("" + roll,355,470);
+}
+
 void mouseClicked(){
     if (dist(mouseX,mouseY,400,400)<= 100 && !newGame && !choose){
 	roll = r.nextInt(6) + 1;
@@ -300,7 +247,7 @@ void mouseClicked(){
     if (choose && mouseX >= 415 && mouseX <= 755 && mouseY >= 525 && mouseY <= 725){
 	choosePlayer(4);
     }
-    if (choose && mouseX >= 300 && mouseX <= 500 && mouseY >= 735 && mouseY <= 795){
+    if (checkPlayer() && mouseX >= 300 && mouseX <= 500 && mouseY >= 735 && mouseY <= 795){
 	newGame = false;
 	choose = false; 
 	drawBoard();

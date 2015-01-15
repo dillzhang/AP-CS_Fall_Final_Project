@@ -58,4 +58,5 @@ Change Log
 | 2015-01-13 | DZ           | Created Hub, Wrote new version of simon as a class, Designed Hub, Connected Simon to Hub |
 | 2015-01-14 | DZ           | Created Abstract Game class for organization, Cleaned up Simon, Created pathway back to hub |
 | 2015-01-14 | SWL          | Created a startup screen for Connect 4 |
-
+| 2015-01-14 | DZ           | Started Battleship, Created Ship and Board Class |
+| 2015-01-15 | DZ           | Integrated Connect into Hub, Added Picture for Connect, Renamed files to specific games |

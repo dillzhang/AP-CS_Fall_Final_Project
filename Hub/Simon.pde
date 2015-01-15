@@ -59,12 +59,12 @@ class Simon extends Game {
     ellipse(400, 400, 110, 110);
 
     //Sound Setup
-    beep1 = loader.loadFile("beep1.mp3");
-    beep2 = loader.loadFile("beep2.mp3");
-    beep3 = loader.loadFile("beep3.mp3");
-    beep4 = loader.loadFile("beep4.mp3");
-    victory = loader.loadFile("victory.mp3");
-    lose = loader.loadFile("lose.mp3");
+    beep1 = loader.loadFile("Simon_beep1.mp3");
+    beep2 = loader.loadFile("Simon_beep2.mp3");
+    beep3 = loader.loadFile("Simon_beep3.mp3");
+    beep4 = loader.loadFile("Simon_beep4.mp3");
+    victory = loader.loadFile("Simon_victory.mp3");
+    lose = loader.loadFile("Simon_lose.mp3");
     
     //Resets Entire GAME
     //Game Play
@@ -171,6 +171,34 @@ class Simon extends Game {
   // keyPressed() ========================================================================================================================================================================================
   
   void keyPressed() {
+    if (newgame) {
+      setupGame();
+      levellength = 3;
+      computermoves = new ArrayList<Integer>();
+      createlevel();
+      //lose.rewind();
+      newgame = false;
+    } else if (levelup) {
+      setupGame();
+      levellength += 1;
+      createlevel();
+      //victory.rewind();
+      levelup = false;
+    } else if (key == 'm') {
+      choice = 4;
+    } else if (key == 'h' && !leveling && !replaying && !newgame) {
+      flashRed();
+      playermoves.add(0);
+    }  else if (key == 'g' && !leveling && !replaying && !newgame) {
+      flashGreen();
+      playermoves.add(1);
+    } else if (key == 't' && !leveling && !replaying && !newgame) {
+      flashBlue();
+      playermoves.add(2);
+    } else if (key == 'y' && !leveling && !replaying && !newgame) {
+      flashYellow();
+      playermoves.add(3);
+    }
     
   }
   

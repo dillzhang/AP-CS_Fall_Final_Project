@@ -31,7 +31,7 @@ WIP
 
 Change Log
 ==========
-|Date (YYYY-MM-DD) | Contributor  | Description |
+| Timestamp  | Contributor  | Description |
 |:-----------|:------------:|:------------|
 | 2014-12-19 | DZ           | Created Repo and README.md |
 | 2014-12-23 | DZ           | Started Project Simon |

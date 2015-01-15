@@ -1,6 +1,8 @@
 PImage logo;
 
 Board player1, player2;
+Board[] boards = {player1, player2};
+
 boolean startScreen, settingUp, playerChange;
 int winner;
 
@@ -30,7 +32,8 @@ void draw() {
   } else if (settingUp) {
     
     for (int i = 0; i < 2; i++) {
-    
+      boards[i] = new Board();
+      
     }
     
   } else if (winner == -1) {
@@ -49,6 +52,9 @@ void draw() {
 }
 
 void mouseClicked() {
+  if (startScreen) {
+    startScreen = false;
+  }
 
 }
 

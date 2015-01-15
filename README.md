@@ -61,5 +61,5 @@ Change Log
 | 2015-01-14 | SWL          | Added a checker for choosing players to ensure there is at least one human player and an opponent at all times |
 | 2015-01-14 | DZ           | Started Battleship, Created Ship and Board Class |
 | 2015-01-15 | DZ           | Integrated Connect into Hub, Added Picture for Connect, Renamed files to specific games |
-
+| 2015-01-15 | DZ           | Fixed Hub's Strokes, Modified Simon start screen to display help info |
 

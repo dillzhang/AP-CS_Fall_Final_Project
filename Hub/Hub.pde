@@ -7,7 +7,7 @@ private Minim loader;
 private Connect connect;
 private Simon simon;
 //private Trouble trouble;
-//private ??? ???;
+//private Battleship battleship;
 
 public int choice = 4;
 
@@ -21,6 +21,7 @@ void setup() {
     connect = new Connect();
     simon = new Simon();
     //trouble = new Trouble();
+    //battleship = new Battleship();
 
     stroke(0,0,0);
 
@@ -101,7 +102,7 @@ void setup() {
   } else if (choice == 2) {
     //trouble.setup();
   } else if (choice == 3) {
-    //.setup()
+    //battleship.setup()
   }
 }
 
@@ -117,7 +118,7 @@ void draw() {
   } else if (choice == 2) {
     //trouble.draw();
   } else if (choice == 3) {
-    //.draw()
+    //battleship.draw()
   }
 }
 
@@ -145,7 +146,7 @@ void mouseClicked() {
   } else if (choice == 2) {
     //trouble.mouseClicked();
   } else if (choice == 3) {
-    //.mouseClicked()
+    //battleship.mouseClicked()
   }
 }
 
@@ -175,7 +176,7 @@ void keyPressed() {
   } else if (choice == 2) {
     //trouble.keyPressed();
   } else if (choice == 3) {
-    //.keyPressed()
+    //battleship.keyPressed()
   }
 }
 

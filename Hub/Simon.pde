@@ -38,25 +38,38 @@ class Simon extends Game {
     text("Click anywhere to start!",400,700);
     
     fill(0, 0, 0);
-    ellipse(400, 400, 490, 490);
+    ellipse(250, 400, 490, 490);
 
     fill(255, 0, 0);
-    arc(410, 410, 430, 430, 0, HALF_PI);
+    arc(260, 410, 430, 430, 0, HALF_PI);
 
     fill(0, 255, 0);
-    arc(390, 410, 430, 430, HALF_PI, PI);
+    arc(240, 410, 430, 430, HALF_PI, PI);
 
     fill(0, 0, 255);
-    arc(390, 390, 430, 430, PI, PI+HALF_PI);
+    arc(240, 390, 430, 430, PI, PI+HALF_PI);
 
     fill(255, 255, 0);
-    arc(410, 390, 430, 430, PI+HALF_PI, 2*PI);
+    arc(260, 390, 430, 430, PI+HALF_PI, 2*PI);
   
     fill(0, 0, 0);
-    ellipse(400, 400, 150, 150);
+    ellipse(250, 400, 150, 150);
 
     fill(204, 204, 204);
-    ellipse(400, 400, 110, 110);
+    ellipse(250, 400, 110, 110);
+    
+    fill(0,0,0);
+    textSize(15);
+    textAlign(LEFT,CENTER);
+    text("This is Simon Says. A simple memory",510,340);
+    text("game for passing the time. To play,",510,355);
+    text("just memorize the pattern flashed by",510,370);
+    text("the game and enter it back. To enter",510,385);
+    text("one can either use the mouse and",510,400);
+    text("click on the quadrants, or use the",510,415);
+    text("keyboard, pressing 'h' for red, 'g'",510,430);
+    text("for green,'t' for blue, and 'y' for",510,445);
+    text("yellow. Have fun and enjoy the game!",510,460);
 
     //Sound Setup
     beep1 = loader.loadFile("Simon_beep1.mp3");

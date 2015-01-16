@@ -1,38 +1,24 @@
 class Ship {
   
   private int shipLength, xStart, yStart;
-  private boolean horizontal;
+  private boolean horizontal, settled;
   
   Ship(int l) {
     shipLength = l;
     horizontal = true;
+    settled = false;
   }
   
-  int returnLength() {
-    return shipLength;
-  }
-  
-  void rotateship() {
+  void rotateShip() {
     horizontal = ! horizontal;
-  }
-  
-  boolean shipRotation() {
-    return horizontal;
   }
   
   void setLocation(int x, int y) {
     xStart = x;
     yStart = y;
+    settled = true;
   }
-  
-  int returnX() {
-    return xStart;
-  }
-  
-  int returnY() {
-    return yStart;
-  }
-  
+
   void drawShip(int x, int y) {
     
     fill(204,204,204);

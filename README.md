@@ -63,4 +63,5 @@ Change Log
 | 2015-01-15 | DZ           | Integrated Connect into Hub, Added Picture for Connect, Renamed files to specific games |
 | 2015-01-15 | DZ           | Fixed Hub's Strokes, Modified Simon start screen to display help info |
 | 2015-01-15 | SWL          | Added a box to Connect 4 that tells the turn |
-
+| 2015-01-15 | DZ           | Added Connect modification to Hub |
+| 2015-01-16 | DZ           | Worked on Battleship, Attempted Board Setup | 

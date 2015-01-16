@@ -1,15 +1,11 @@
 class Board {
- 
-  private int startingX, startingY;
+  
   private char[][] field = new char[10][10];
   
   private Ship s1 = new Ship(2), s2 = new Ship(4), s3 = new Ship(4), s4 = new Ship(5), s5 = new Ship(7);
   public final Ship[] ships = {s1, s2, s3, s4, s5};
  
-  Board(int x, int y) {
-    startingX = x;
-    startingY = y;
-    
+  Board() {
     for (int i = 0; i < field.length ; i++) {
       for (int j = 0; j < field[i].length ; j++) {
         field[i][j] = 'o';
@@ -17,31 +13,33 @@ class Board {
     }
   }
   
-  void drawBoard() {
+  void drawBoard(int x, int y) {
     for (int i = 0; i < field.length ; i++ ) {
       for (int j = 0; j < field[i].length; j++) {
         fill(75, 100, 255);
-        rect(startingX + 38 * i, startingY + 38 * j, 38,38);
+        rect(x + 38 * i, y + 38 * j, 38,38);
       }
     }
   }
   
   void drawShips() {
     for (int i = 0; i < ships.length ; i++) {
-      ships[i].drawShipLoc();
+      if (ships[i].settled) {
+        ships[i].drawShipLoc();
+      }
     }
   }
     
   
   boolean checkLocation(int x, int y, Ship s) {
-    if (s.shipRotation()) {
-      for (int i = 0; i < s.returnLength(); i++) {
+    if (s.horizontal) {
+      for (int i = 0; i < s.shipLength; i++) {
         if (!(x + i < field[x].length && field[i][y] == 'o')) {
           return false;
         }
       }
     } else {
-      for (int i = 0; i < s.returnLength(); i++) {
+      for (int i = 0; i < s.shipLength; i++) {
         if (!(x + i < field.length && field[x][i] == 'o')) {
           return false;
         }
@@ -50,12 +48,24 @@ class Board {
     return true;
   }
   
-  int properX() {
-    return (int)((mouseX - startingX) / 38);
+  void placeShip(int x, int y, Ship s) {
+    if (s.horizontal) {
+      for (int i = 0; i < s.shipLength; i++) {
+        field[i][y] = 's';
+      }
+    } else {
+      for (int i = 0; i < s.shipLength; i++) {
+        field[x][i] = 's';
+      }
+    }
   }
   
-  int properY() {
-    return (int)((mouseY - startingY) / 38);
+  int properX(int x) {
+    return (int)((mouseX - x) / 38);
+  }
+  
+  int properY(int y) {
+    return (int)((mouseY - y) / 38);
   }
   
 }

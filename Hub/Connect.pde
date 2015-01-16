@@ -218,6 +218,25 @@ class Connect extends Game {
       }
   }
   
+  /* 
+   shows the current turn in order to help
+   the player remember who's turn it was 
+  */
+  private void showTurn(){
+      fill(63,124,231);
+      stroke(255);
+      rect(340,110,120,30);
+      if (turn == 0){
+    fill(255);
+    textSize(20);
+    text("Turn: Black", 345,139);
+      }
+      if (turn == 1){
+    fill(255);
+    text(" Turn: Red",345,139);
+      }
+  }
+
   /*
     checkWin checks whether any of all of the possible
     winning scenarios are met. If it is, it sets wr1,
@@ -459,6 +478,7 @@ class Connect extends Game {
   	checkWin();
   	showWin();
       }
+      if (!firstStart) showTurn();
   }
   
 }

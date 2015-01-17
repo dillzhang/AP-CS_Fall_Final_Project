@@ -65,3 +65,4 @@ Change Log
 | 2015-01-15 | SWL          | Added a box to Connect 4 that tells the turn |
 | 2015-01-15 | DZ           | Added Connect modification to Hub |
 | 2015-01-16 | DZ           | Worked on Battleship, Attempted Board Setup | 
+| 2015-01-17 | DZ           | Fixed Ship Placement for Battleship |

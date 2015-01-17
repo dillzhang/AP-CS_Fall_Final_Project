@@ -1,4 +1,4 @@
-class Board {
+class Board{
   
   private char[][] field = new char[10][10];
   
@@ -16,7 +16,11 @@ class Board {
   void drawBoard(int x, int y) {
     for (int i = 0; i < field.length ; i++ ) {
       for (int j = 0; j < field[i].length; j++) {
-        fill(75, 100, 255);
+        if (field[i][j] == 'o') {
+          fill(75, 100, 255);
+        } else {
+          fill(255, 0, 0);
+        }
         rect(x + 38 * i, y + 38 * j, 38,38);
       }
     }
@@ -34,13 +38,13 @@ class Board {
   boolean checkLocation(int x, int y, Ship s) {
     if (s.horizontal) {
       for (int i = 0; i < s.shipLength; i++) {
-        if (!(x + i < field[x].length && field[i][y] == 'o')) {
+        if (!(x + i < field.length && field[i + x][y] == 'o')) {
           return false;
         }
       }
     } else {
       for (int i = 0; i < s.shipLength; i++) {
-        if (!(x + i < field.length && field[x][i] == 'o')) {
+        if (!(y + i < field[x].length && field[x][i + y] == 'o')) {
           return false;
         }
       }
@@ -51,11 +55,11 @@ class Board {
   void placeShip(int x, int y, Ship s) {
     if (s.horizontal) {
       for (int i = 0; i < s.shipLength; i++) {
-        field[i][y] = 's';
+        field[i + x][y] = 's';
       }
     } else {
       for (int i = 0; i < s.shipLength; i++) {
-        field[x][i] = 's';
+        field[x][i + y] = 's';
       }
     }
   }

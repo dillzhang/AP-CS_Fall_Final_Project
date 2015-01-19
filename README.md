@@ -66,3 +66,4 @@ Change Log
 | 2015-01-15 | DZ           | Added Connect modification to Hub |
 | 2015-01-16 | DZ           | Worked on Battleship, Attempted Board Setup | 
 | 2015-01-17 | DZ           | Fixed Ship Placement for Battleship |
+| 2015-01-19 | SWL          | Completed startscreen | 

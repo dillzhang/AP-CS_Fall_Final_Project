@@ -6,7 +6,7 @@ Board[] boards = {player1, player2};
 
 //Location Data
 int[][][] locationData = {
-  { 
+  { //Board Location, Target Location
     {10, 10} , {10, 410} 
   } , {
     {410, 10} , {410,410}  
@@ -33,7 +33,7 @@ void setup() {
   //Game Play
   startScreen = true;
   settingUp = true;
-  winner = -2;
+  winner = -1;
   playerChange = true;
   
   playerTurn = 0;
@@ -66,12 +66,28 @@ void draw() {
  
     } else {
  
+       playerTurn = 0;
       settingUp = false;
  
     }
     
   } else if (winner == -1) {
-  
+    if (playerTurn < 2) {
+      int opposite = Math.abs(playerTurn - 1);
+      
+      boards[playerTurn].drawBoard(locationData[playerTurn][0][0], locationData[playerTurn][0][1]);
+      boards[playerTurn].drawShips();
+      boards[playerTurn].drawShots(locationData[playerTurn][0][0], locationData[playerTurn][0][1]);
+      
+      boards[opposite].drawBoard(locationData[playerTurn][1][0], locationData[playerTurn][1][1]);
+      boards[opposite].drawShots(locationData[playerTurn][1][0], locationData[playerTurn][1][1]);
+      
+      if (mouseX > locationData[playerTurn][1][0] && mouseX < locationData[playerTurn][1][0] + 380 && mouseY > locationData[playerTurn][1][1] && mouseY < locationData[playerTurn][1][1] + 380) {
+        boards[opposite].drawTarget(boards[opposite].properX(locationData[playerTurn][1][0]) * 38 + locationData[playerTurn][1][0], boards[opposite].properY(locationData[playerTurn][1][1]) * 38 + locationData[playerTurn][1][1]);
+      }
+    } else {
+      playerTurn = 0;
+    }
   }
 }
 
@@ -80,7 +96,7 @@ void mouseClicked() {
     startScreen = false;
   } else if (settingUp) {
     
-    if (mouseButton == LEFT && mouseX > locationData[playerTurn][0][0] && mouseX < locationData[playerTurn][0][0] + 380 && mouseY > locationData[playerTurn][0][1] && mouseY < locationData[playerTurn][0][0] + 380 && boards[playerTurn].checkLocation(boards[playerTurn].properX(locationData[playerTurn][0][0]), boards[playerTurn].properY(locationData[playerTurn][0][1]), boards[playerTurn].ships[shipNumber])) {
+    if (mouseButton == LEFT && mouseX > locationData[playerTurn][0][0] && mouseX < locationData[playerTurn][0][0] + 380 && mouseY > locationData[playerTurn][0][1] && mouseY < locationData[playerTurn][0][1] + 380 && boards[playerTurn].checkLocation(boards[playerTurn].properX(locationData[playerTurn][0][0]), boards[playerTurn].properY(locationData[playerTurn][0][1]), boards[playerTurn].ships[shipNumber])) {
       boards[playerTurn].ships[shipNumber].setLocation(boards[playerTurn].properX(locationData[playerTurn][0][0]) * 38 + locationData[playerTurn][0][0], boards[playerTurn].properY(locationData[playerTurn][0][1]) * 38 + locationData[playerTurn][0][1]);
       boards[playerTurn].placeShip(boards[playerTurn].properX(locationData[playerTurn][0][0]), boards[playerTurn].properY(locationData[playerTurn][0][1]), boards[playerTurn].ships[shipNumber]);
       shipNumber += 1;

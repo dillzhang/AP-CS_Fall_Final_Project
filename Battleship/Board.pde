@@ -16,11 +16,7 @@ class Board{
   void drawBoard(int x, int y) {
     for (int i = 0; i < field.length ; i++ ) {
       for (int j = 0; j < field[i].length; j++) {
-        if (field[i][j] == 'o') {
-          fill(75, 100, 255);
-        } else {
-          fill(255, 0, 0);
-        }
+        fill(75, 100, 255);
         rect(x + 38 * i, y + 38 * j, 38,38);
       }
     }
@@ -33,7 +29,31 @@ class Board{
       }
     }
   }
-    
+  
+  void drawShots(int x, int y) {
+    for (int i = 0; i < field.length ; i++ ) {
+      for (int j = 0; j < field[i].length; j++ ) {
+        if (field[i][j] == 'm') {
+          fill(255,255,255);
+          ellipse(x + 38 * i, y + 38 * j, 32, 32);
+        } else if (field[i][j] == 'h') {
+          fill(255,0,0);
+          ellipse(x + 38 * i, y + 38 * j, 32, 32);
+        }
+      }
+    }
+  } 
+  
+  void drawTarget(int x, int y) {
+    fill(255,0,0);
+    ellipse(x + 19, y + 19, 28, 28);
+    fill(255,255,255);
+    ellipse(x + 19, y + 19, 24, 24);
+    fill(255,0,0);
+    rect(x + 2, y + 18, 34, 2);
+    rect(x + 18, y + 2, 2, 34);
+    ellipse(x + 19, y + 19, 6, 6);
+  }
   
   boolean checkLocation(int x, int y, Ship s) {
     if (s.horizontal) {

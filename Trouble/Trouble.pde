@@ -1,39 +1,23 @@
 import java.util.Random;
 import java.util.Arrays;
 
-private int[][] basic = new int[][]{{770,400},{757,496},{720,585},{662,662}, {585,720},
-				    {496,757},{400,770},{304,757},{215,720},{138,662},{80,585},
-				    {43,496},{30,400},{43,304},{80,215},{138,138},{215,80},{304,43},
-				    {400,30},{496,43},{585,80},{662,138},{720,215},{757,304},
-				    {610,185},{570,225},{530,265},{490,305},{610,615},{570,575},
-				    {530,535},{490,495},{190,615},{230,575},{270,535},{310,495},
-				    {190,185},{230,225},{270,265},{310,305}};
-private int[][] yellow = new int[][] {{770,400},{757,496},{720,585},{662,662}, {585,720},
-				      {496,757},{400,770},{304,757},{215,720},{138,662},{80,585},
-				      {43,496},{30,400},{43,304},{80,215},{138,138},{215,80},{304,43},
-				      {400,30},{496,43},{585,80},{662,138},{720,215},{757,304},
-				      {610,185},{570,225},{530,265},{490,305}};
-private int[][] blue = new int[][] {{770,400},{757,496},{720,585},{662,662}, {585,720},
-				    {496,757},{400,770},{304,757},{215,720},{138,662},{80,585},
-				    {43,496},{30,400},{43,304},{80,215},{138,138},{215,80},{304,43},
-				    {400,30},{496,43},{585,80},{662,138},{720,215},{757,304},
-				    {610,615},{570,575},{530,535},{490,495}};
-private int[][] red = new int[][] {{770,400},{757,496},{720,585},{662,662}, {585,720},
-				   {496,757},{400,770},{304,757},{215,720},{138,662},{80,585},
-				   {43,496},{30,400},{43,304},{80,215},{138,138},{215,80},{304,43},
-				   {400,30},{496,43},{585,80},{662,138},{720,215},{757,304},
-				   {190,615},{230,575},{270,535},{310,495}};
-private int[][] green = new int[][] {{770,400},{757,496},{720,585},{662,662}, {585,720},
-				     {496,757},{400,770},{304,757},{215,720},{138,662},{80,585},	     
-                                     {43,496},{30,400},{43,304},{80,215},{138,138},{215,80},{304,43},
-				     {400,30},{496,43},{585,80},{662,138},{720,215},{757,304},
-				     {190,185},{230,225},{270,265},{310,305}};
+private int[][] basic = new int[][]{{770,400},{757,496},{720,585},{662,662}, {585,720}, {496,757},{400,770},{304,757},{215,720},{138,662},{80,585},{43,496},{30,400},{43,304},{80,215},{138,138},{215,80},{304,43},{400,30},{496,43},{585,80},{662,138},{720,215},{757,304},{610,185},{570,225},{530,265},{490,305},{610,615},{570,575},{530,535},{490,495},{190,615},{230,575},{270,535},{310,495},{190,185},{230,225},{270,265},{310,305}};
+
+private int[][] yellowPath = new int[][] {{662,138},{720,215},{757,304}, {770,400},{757,496},{720,585},{662,662}, {585,720},{496,757},{400,770},{304,757},{215,720},{138,662},{80,585},{43,496},{30,400},{43,304},{80,215},{138,138},{215,80},{304,43},{400,30},{496,43},{585,80},{610,185},{570,225},{530,265},{490,305}};
+
+private int[][] bluePath = new int[][] {{662,662}, {585,720},{496,757},{400,770},{304,757},{215,720},{138,662},{80,585},{43,496},{30,400},{43,304},{80,215},{138,138},{215,80},{304,43},{400,30},{496,43},{585,80},{662,138},{720,215},{757,304}, {770,400},{757,496},{720,585},{610,615},{570,575},{530,535},{490,495}};
+
+private int[][] redPath = new int[][] { {138,662},{80,585},{43,496},{30,400},{43,304},{80,215},{138,138},{215,80},{304,43},{400,30},{496,43},{585,80},{662,138},{720,215},{757,304}, {770,400},{757,496},{720,585}, {662,662}, {585,720},{496,757},{400,770},{304,757},{215,720},{190,615},{230,575},{270,535},{310,495}};
+
+private int[][] greenPath = new int[][] { {138,138},{215,80},{304,43},{400,30},{496,43},{585,80},{662,138},{720,215},{757,304}, {770,400},{757,496},{720,585}, {662,662}, {585,720},{496,757},{400,770},{304,757},{215,720}, {138,662},{80,585},{43,496},{30,400},{43,304},{80,215},{190,185},{230,225},{270,265},{310,305}};
+
 private boolean clicked, circle, newGame,choose,choosing,rolling,startGame;
 private boolean gPlayer,yPlayer,rPlayer,bPlayer;
 private int roll, time;
 private Random r = new Random();
 private int[][] pInfo = new int[4][5];
 private int[][] order = new int[4][2];
+private int turn;
 
 void setup(){
     size(800,800);
@@ -49,9 +33,11 @@ void setup(){
 	}
     }
     for (int x = 0; x < 4; x++){
-      order[x][0] = 0;
+	order[x][0] = 0;
+        order[x][1] = 0;
     }
-    gPlayer = yPlayer = rPlayer = bPlayer = false;
+    gPlayer = yPlayer = rPlayer = bPlayer = clicked = circle = newGame = choose = choosing = rolling = startGame = false;
+    turn = 0;
     promptNewGame();
 }
 
@@ -209,38 +195,46 @@ private boolean checkPlayer(){
 }
 
 private boolean checkQuad(){
-  int numPlayers = 0;
-  int numOrdered = 0;
+    int numPlayers = 0;
+    int numOrdered = 0;
     for (int p = 0; p < 4; p++){
-  if ((pInfo[p][0] == 0) || (pInfo[p][0] == -1)) numPlayers++;
-  if (order[p][0] >= 1) numOrdered++;
+	if ((pInfo[p][0] == 0) || (pInfo[p][0] == -1)) numPlayers++;
+	if (order[p][0] >= 1) numOrdered++;
     }
     if (numPlayers == numOrdered) return true;
     return false;
 }
 
 private void sortOrder(){
-  
+    for (int n = 0;n < 4; n++){
+	int loc;
+	int temp = order[n][0];
+	for (loc = n; loc > 0 && order[n][0] < order[n-1][0]; loc--){
+	    order[loc][0] = order[loc - 1][0];
+	}
+	order[loc][0] = temp;
+    } 
 }
+
 private void chooseOrder(){
     fill(0);
     stroke(0);
     rect(0,0,800,800);
     if (pInfo[0][0] != 1) {
-      fill(15,140,25);
-      rect(0,0,400,400);
+	fill(15,140,25);
+	rect(0,0,400,400);
     }
     if (pInfo[1][0] != 1) {
-      fill(255,215,20);
-      rect(400,0,400,400);
+	fill(255,215,20);
+	rect(400,0,400,400);
     }
     if (pInfo[2][0] != 1) {
-      fill(200,0,10);
-      rect(0,400,400,400);
+	fill(200,0,10);
+	rect(0,400,400,400);
     }
     if (pInfo[3][0] != 1) {
-      fill(0,50,220);
-      rect(400,400,400,400);
+	fill(0,50,220);
+	rect(400,400,400,400);
     }
     fill(205);
     stroke(0);
@@ -259,47 +253,49 @@ private void showQuad(){
     stroke(0);
     rect(0,0,800,800);
     if (pInfo[0][0] != 1) {
-      fill(15,140,25);
-      rect(0,0,400,400);
+	fill(15,140,25);
+	rect(0,0,400,400);
     }
     if (pInfo[1][0] != 1) {
-      fill(255,215,20);
-      rect(400,0,400,400);
+	fill(255,215,20);
+	rect(400,0,400,400);
     }
     if (pInfo[2][0] != 1) {
-      fill(200,0,10);
-      rect(0,400,400,400);
+	fill(200,0,10);
+	rect(0,400,400,400);
     }
     if (pInfo[3][0] != 1) {
-      fill(0,50,220);
-      rect(400,400,400,400);
+	fill(0,50,220);
+	rect(400,400,400,400);
 
     }
     fill(0);
     textSize(400);
     textAlign(CENTER,TOP);
     if (order[0][0] > 0){
-      text(order[0][0],200,-100);
+	text(order[0][0],200,-100);
     }
     if (order[1][0] > 0){
-      text(order[1][0],600,-100);
+	text(order[1][0],600,-100);
     }
     if (order[2][0] > 0){
-      text(order[2][0],200,300);
+	text(order[2][0],200,300);
     }
     if (order[3][0] >0){
-      text(order[3][0],600,300);
+	text(order[3][0],600,300);
     }
     fill(205);
     stroke(0);
     strokeWeight(5);
     ellipse(400,400,200,200);
     if (checkQuad()){
-      fill(0);
-      textSize(75);
-      text("Done",400,350);
-      Arrays.sort(order);
-      startGame = true;
+	fill(0);
+	textSize(75);
+	text("Done",400,350);
+	sortOrder();
+        print(duh());
+	//Arrays.sort(order);
+	startGame = true;
     }
 }
 
@@ -360,43 +356,43 @@ void mouseClicked(){
 	//drawBoard();
     }
     if (choosing && mouseX >= 0 && mouseX <= 400 && mouseY >= 0 && mouseY <= 400 && pInfo[0][0] != 1 && !gPlayer  && !choose  && !rolling){
-      roll = r.nextInt(6) + 1;
-      rolling = true;
-      clicked = true;
-      time = second();
-      gPlayer = true;
-      order[0][0] = roll;
-      order[0][1] = 0;
+	roll = r.nextInt(6) + 1;
+	rolling = true;
+	clicked = true;
+	time = second();
+	gPlayer = true;
+	order[0][0] = roll;
+	order[0][1] = 0;
     }
     if (choosing && mouseX >= 400 && mouseY <= 400 && pInfo[1][0] != 1 && !yPlayer && !choose  && !rolling){
-      roll = r.nextInt(6) + 1;
-      rolling = true;
-      clicked = true;
-      time = second();
-      yPlayer = true;
-      order[1][0] = roll;
-      order[1][1] = 1;
+	roll = r.nextInt(6) + 1;
+	rolling = true;
+	clicked = true;
+	time = second();
+	yPlayer = true;
+	order[1][0] = roll;
+	order[1][1] = 1;
     }
     if (choosing && mouseX >= 0 && mouseX <= 400 && mouseY >= 400 && pInfo[2][0] != 1 && !rPlayer && !choose  && !rolling){
-      roll = r.nextInt(6) + 1;
-      rolling = true;
-      clicked = true;
-      time = second();
-      rPlayer = true;
-      order[2][0] = roll;
-      order[2][1] = 2;
+	roll = r.nextInt(6) + 1;
+	rolling = true;
+	clicked = true;
+	time = second();
+	rPlayer = true;
+	order[2][0] = roll;
+	order[2][1] = 2;
     }
     if (choosing && mouseX >= 400 && mouseY >= 400 && pInfo[3][0] != 1 && !bPlayer && !choose && !rolling){
-      roll = r.nextInt(6) + 1;
-      rolling = true;
-      clicked = true;
-      time = second();
-      bPlayer = true;
-      order[3][0] = roll;
-      order[3][1] = 3;
+	roll = r.nextInt(6) + 1;
+	rolling = true;
+	clicked = true;
+	time = second();
+	bPlayer = true;
+	order[3][0] = roll;
+	order[3][1] = 3;
     }
     if (startGame && dist(mouseX,mouseY,400,400)<= 100 && choosing && !newGame && !choose){
-      drawBoard();
+	drawBoard();
     }
 }
 
@@ -412,4 +408,12 @@ void draw(){
     if (choose && newGame) showPlayers();
 }
 
+public String duh(){
+  String s = "";
+  for (int u = 0; u < 4; u++){
+    s += order[u][0] + " + ";
+  }
+  s += "\n";
+  return s;
+}
 

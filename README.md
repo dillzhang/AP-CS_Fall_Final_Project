@@ -68,4 +68,5 @@ Change Log
 | 2015-01-17 | DZ           | Fixed Ship Placement for Battleship |
 | 2015-01-19 | SWL          | Completed startscreen for Trouble | 
 | 2015-01-19 | SWL          | Fixed the paths each color takes in Trouble |
+| 2015-01-20 | DZ           | Started Gameplay, Draws own and oppents board, Adds targeting animation |
 

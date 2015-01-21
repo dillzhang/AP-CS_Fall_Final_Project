@@ -1,6 +1,12 @@
 import java.util.Random;
-import java.util.Arrays;
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Instance Variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+/*
+  The 2d arrays of basic, yellowPath, bluePath, redPath, and greenPath are the locations of the cirles
+  that the pieces of the board game would follow. It is hard-coded in because this would never change
+  for any color or for any reason. Also, there may have been an easier way by using math but my math
+  skills are not high enough. 
+*/
 private int[][] basic = new int[][]{{770,400},{757,496},{720,585},{662,662}, {585,720}, {496,757},{400,770},{304,757},{215,720},{138,662},{80,585},{43,496},{30,400},{43,304},{80,215},{138,138},{215,80},{304,43},{400,30},{496,43},{585,80},{662,138},{720,215},{757,304},{610,185},{570,225},{530,265},{490,305},{610,615},{570,575},{530,535},{490,495},{190,615},{230,575},{270,535},{310,495},{190,185},{230,225},{270,265},{310,305}};
 
 private int[][] yellowPath = new int[][] {{662,138},{720,215},{757,304}, {770,400},{757,496},{720,585},{662,662}, {585,720},{496,757},{400,770},{304,757},{215,720},{138,662},{80,585},{43,496},{30,400},{43,304},{80,215},{138,138},{215,80},{304,43},{400,30},{496,43},{585,80},{610,185},{570,225},{530,265},{490,305}};
@@ -11,36 +17,50 @@ private int[][] redPath = new int[][] { {138,662},{80,585},{43,496},{30,400},{43
 
 private int[][] greenPath = new int[][] { {138,138},{215,80},{304,43},{400,30},{496,43},{585,80},{662,138},{720,215},{757,304}, {770,400},{757,496},{720,585}, {662,662}, {585,720},{496,757},{400,770},{304,757},{215,720}, {138,662},{80,585},{43,496},{30,400},{43,304},{80,215},{190,185},{230,225},{270,265},{310,305}};
 
-private boolean clicked, circle, newGame,choose,choosing,rolling,startGame;
-private boolean gPlayer,yPlayer,rPlayer,bPlayer;
-private int roll, time;
-private Random r = new Random();
-private int[][] pInfo = new int[4][5];
-private int[][] order = new int[4][2];
-private int turn;
+//this is used to keep track of each player's/AI's info
+private int[][] pInfo = new int[4][6];
 
+/*
+  Most of the boolean variables are just used to keep track of certain that happen. circle is used
+  to alternate between drawing an ellipse and writing a number when rolling (flashing). clicked
+  checks if one has clicked on a certain thing and is used to prevent further clicking as the 
+  the event is happening. 
+*/
+private boolean clicked, circle;
+
+/*
+  gPlayer, yPlayer, rPlayer, and bPlayer are used to keep track of what players have been assigned
+  an order
+*/
+private boolean gPlayer,yPlayer,rPlayer,bPlayer;
+
+//roll is used for keeping track of what number has been rolled while the flashR is flashing
+//time is used keep track of time when the flashR is flashing
+//level is to keep track of what part of the game the user is currently at
+private int roll, time,level;
+
+//self-explained
+private Random r = new Random();
+
+//setup resets the whole game and all the necessary variables
 void setup(){
     size(800,800);
     frameRate(30);
     PFont font;
     font = createFont("bubble.ttf",200);
     textFont(font);
-    newGame = true;
+    level = turn = 0;
     for (int x = 0; x < 4; x++){
-	for (int y = 0; y < 5; y++){
+	for (int y = 0; y < 6; y++){
 	    if (y == 0) pInfo[x][y] = 1;
 	    else pInfo[x][y] = 0;
 	}
     }
-    for (int x = 0; x < 4; x++){
-	order[x][0] = 0;
-        order[x][1] = 0;
-    }
-    gPlayer = yPlayer = rPlayer = bPlayer = clicked = circle = newGame = choose = choosing = rolling = startGame = false;
-    turn = 0;
+    gPlayer = yPlayer = rPlayer = bPlayer = clicked = circle = rolling = false;
     promptNewGame();
 }
 
+//drawBoard draws the board in the fancy colors
 private void drawBoard(){
     textAlign(BASELINE);
     stroke(15,140,20);
@@ -85,8 +105,8 @@ private void drawBoard(){
     text('S',655,150);
 }
 
+//this is the first start screen that appears upon startup
 private void promptNewGame(){
-    newGame = true;
     stroke(0);
     fill(0);
     rect(0,0,800,800);
@@ -103,9 +123,10 @@ private void promptNewGame(){
     fill(0,50,220);
     text("Click to Change Settings",400,245);
     textSize(150);
-    choose = true;
 }
 
+//this is a simple switcher that helps showPlayers to determine
+//what should be shown: AI, N/A, or P (person)
 private void choosePlayer(int player){
     int loc = player -1;
     if (pInfo[loc][0] == -1){
@@ -117,6 +138,11 @@ private void choosePlayer(int player){
     }
 }
 
+/*
+  showPlayers shows the current settings that the user has chosen on what players 
+  will be playing. A done button appears when at least one player and opponent
+  have been selected.
+*/
 private void showPlayers(){
     stroke(0);
     strokeWeight(5);
@@ -182,6 +208,7 @@ private void showPlayers(){
     }
 }
 
+// checkPlayer checks whether the requirements of a new game has been completed
 private boolean checkPlayer(){
     int numP = 0;
     int numAI = 0;
@@ -194,28 +221,7 @@ private boolean checkPlayer(){
     return false;
 }
 
-private boolean checkQuad(){
-    int numPlayers = 0;
-    int numOrdered = 0;
-    for (int p = 0; p < 4; p++){
-	if ((pInfo[p][0] == 0) || (pInfo[p][0] == -1)) numPlayers++;
-	if (order[p][0] >= 1) numOrdered++;
-    }
-    if (numPlayers == numOrdered) return true;
-    return false;
-}
-
-private void sortOrder(){
-    for (int n = 0;n < 4; n++){
-	int loc;
-	int temp = order[n][0];
-	for (loc = n; loc > 0 && order[n][0] < order[n-1][0]; loc--){
-	    order[loc][0] = order[loc - 1][0];
-	}
-	order[loc][0] = temp;
-    } 
-}
-
+// this is the first part of choosing what players get what order w/ user clicks
 private void chooseOrder(){
     fill(0);
     stroke(0);
@@ -248,6 +254,7 @@ private void chooseOrder(){
     text("Click each quadrant to roll for order:",400,100);
 }
 
+//this shows the rolls each player gets that determine the order that game is played in
 private void showQuad(){
     fill(0);
     stroke(0);
@@ -272,17 +279,17 @@ private void showQuad(){
     fill(0);
     textSize(400);
     textAlign(CENTER,TOP);
-    if (order[0][0] > 0){
-	text(order[0][0],200,-100);
+    if (pInfo[0][1] > 0){
+	text(pInfo[0][1],200,-100);
     }
-    if (order[1][0] > 0){
-	text(order[1][0],600,-100);
+    if (pInfo[1][1] > 0){
+	text(pInfo[1][1],600,-100);
     }
-    if (order[2][0] > 0){
-	text(order[2][0],200,300);
+    if (pInfo[2][1] > 0){
+	text(pInfo[2][1],200,300);
     }
-    if (order[3][0] >0){
-	text(order[3][0],600,300);
+    if (pInfo[3][1] >0){
+	text(pInfo[3][1],600,300);
     }
     fill(205);
     stroke(0);
@@ -292,14 +299,31 @@ private void showQuad(){
 	fill(0);
 	textSize(75);
 	text("Done",400,350);
-	sortOrder();
-        print(duh());
-	//Arrays.sort(order);
-	startGame = true;
+	level = 2;
     }
 }
 
+// this checks if all the players have been given an order
+private boolean checkQuad(){
+    int numPlayers = 0;
+    int numOrdered = 0;
+    for (int p = 0; p < 4; p++){
+	if ((pInfo[p][0] == 0) || (pInfo[p][0] == -1)) numPlayers++;
+	if (pInfo[p][1] >= 1 && pInfo[p][1] <= 6) numOrdered++;
+    }
+    if (numPlayers == numOrdered) return true;
+    return false;
+}
 
+//this reRolls so that no player gets the same roll when choosing the order (to make my life easier)
+private boolean reRoll(){
+    for (int x = 0; x < 4; x++){
+	if (pInfo[x][1] == roll) return true;
+    }
+    return false;
+}
+
+// this flashes the roll of randomly; however, the end result has already been chosen before this
 private void flashR(){
     textAlign(BASELINE);
     int a = r.nextInt(6) + 1;
@@ -317,9 +341,9 @@ private void flashR(){
     }
 }
 
+//this shows the last roll/end result
 private void showRoll(){
     clicked = false;
-    rolling = false;
     fill(205);
     stroke(0);
     strokeWeight(5);
@@ -329,91 +353,76 @@ private void showRoll(){
     text("" + roll,350,470);
 }
 
+//this takes a click and decides what to do based on a mix of boolean variables, level, and mouse location
 void mouseClicked(){
-    if (dist(mouseX,mouseY,400,400)<= 100 && !newGame && !choose && !choosing){
+    if (dist(mouseX,mouseY,400,400)<= 100 && level > 1){
 	roll = r.nextInt(6) + 1;
         rolling = true;
 	clicked = true;
 	time = second();
     }
-    if (choose && mouseX >= 15 && mouseX <= 385  && mouseY >= 295 && mouseY <= 495){
+    if (level == 0 && mouseX >= 15 && mouseX <= 385  && mouseY >= 295 && mouseY <= 495){
 	choosePlayer(1);
     }
-    if (choose && mouseX >= 415 && mouseX <= 755 && mouseY >= 295 && mouseY <= 495){
+    if (level == 0 && mouseX >= 415 && mouseX <= 755 && mouseY >= 295 && mouseY <= 495){
 	choosePlayer(2);
     }
-    if (choose && mouseX >= 15 && mouseX <= 385 && mouseY >= 525 && mouseY <= 725){
+    if (level == 0 && mouseX >= 15 && mouseX <= 385 && mouseY >= 525 && mouseY <= 725){
 	choosePlayer(3);
     }
-    if (choose && mouseX >= 415 && mouseX <= 755 && mouseY >= 525 && mouseY <= 725){
+    if (level == 0 && mouseX >= 415 && mouseX <= 755 && mouseY >= 525 && mouseY <= 725){
 	choosePlayer(4);
     }
     if (checkPlayer() && mouseX >= 300 && mouseX <= 500 && mouseY >= 735 && mouseY <= 795){
-	newGame = false;
-	choose = false; 
-        choosing = true;
+	level = 1;
         chooseOrder();
-	//drawBoard();
     }
-    if (choosing && mouseX >= 0 && mouseX <= 400 && mouseY >= 0 && mouseY <= 400 && pInfo[0][0] != 1 && !gPlayer  && !choose  && !rolling){
+    if (level == 1 && mouseX >= 0 && mouseX <= 400 && mouseY >= 0 && mouseY <= 400 && pInfo[0][0] != 1 && !gPlayer && !clicked){
 	roll = r.nextInt(6) + 1;
-	rolling = true;
+        while (reRoll()) roll = r.nextInt(6) + 1;
 	clicked = true;
 	time = second();
 	gPlayer = true;
-	order[0][0] = roll;
-	order[0][1] = 0;
+	pInfo[0][1] = roll;
     }
-    if (choosing && mouseX >= 400 && mouseY <= 400 && pInfo[1][0] != 1 && !yPlayer && !choose  && !rolling){
+    if (level == 1 && mouseX >= 400 && mouseY <= 400 && pInfo[1][0] != 1 && !yPlayer && !clicked){
 	roll = r.nextInt(6) + 1;
-	rolling = true;
+	while (reRoll()) roll = r.nextInt(6) + 1;
 	clicked = true;
 	time = second();
 	yPlayer = true;
-	order[1][0] = roll;
-	order[1][1] = 1;
+	pInfo[1][1] = roll;
     }
-    if (choosing && mouseX >= 0 && mouseX <= 400 && mouseY >= 400 && pInfo[2][0] != 1 && !rPlayer && !choose  && !rolling){
+    if (level == 1 && mouseX >= 0 && mouseX <= 400 && mouseY >= 400 && pInfo[2][0] != 1 && !rPlayer && !clicked){
 	roll = r.nextInt(6) + 1;
-	rolling = true;
+	while (reRoll()) roll = r.nextInt(6) + 1;
 	clicked = true;
 	time = second();
 	rPlayer = true;
-	order[2][0] = roll;
-	order[2][1] = 2;
+	pInfo[2][1] = roll;
     }
-    if (choosing && mouseX >= 400 && mouseY >= 400 && pInfo[3][0] != 1 && !bPlayer && !choose && !rolling){
+    if (level == 1 && mouseX >= 400 && mouseY >= 400 && pInfo[3][0] != 1 && !bPlayer  && !clicked){
 	roll = r.nextInt(6) + 1;
-	rolling = true;
+	while (reRoll()) roll = r.nextInt(6) + 1;
 	clicked = true;
 	time = second();
 	bPlayer = true;
-	order[3][0] = roll;
-	order[3][1] = 3;
+	pInfo[3][1] = roll;
     }
-    if (startGame && dist(mouseX,mouseY,400,400)<= 100 && choosing && !newGame && !choose){
+    if (dist(mouseX,mouseY,400,400)<= 100 && level == 2){
 	drawBoard();
     }
 }
 
+// this is my testing shortcut
 void keyPressed(){
     if (key == 's') setup();
 }
+
+// this redraws what is necessary
 void draw(){
-    if (second() < (time + 2) && clicked && !newGame && !choose) flashR();
+    if (second() < (time + 2) && clicked && level >= 1) flashR();
     else if (clicked) showRoll();
-    if (second() > (time + 1) && choosing && !newGame && !choose && !startGame) showQuad();
-    //if (second() < (time + 2) && organize && !choose & !newGame) beginGame();
-    //if (order) beginGame();
-    if (choose && newGame) showPlayers();
+    if (second() > (time + 1) && level == 1) showQuad();
+    if (level == 0) showPlayers();
 }
-
-public String duh(){
-  String s = "";
-  for (int u = 0; u < 4; u++){
-    s += order[u][0] + " + ";
-  }
-  s += "\n";
-  return s;
-}
-

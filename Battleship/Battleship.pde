@@ -15,7 +15,7 @@ int[][][] locationData = {
 
 //Game Play Booleans
 boolean startScreen, settingUp, playerChange;
-int winner, shipNumber, playerTurn;
+int winner, shipNumber, playerTurn, opposite;
 
 void setup() {
   logo = loadImage("battleshiplogo.png");
@@ -73,7 +73,9 @@ void draw() {
     
   } else if (winner == -1) {
     if (playerTurn < 2) {
-      int opposite = Math.abs(playerTurn - 1);
+      background(0,0,0);
+      
+      opposite = Math.abs(playerTurn - 1);
       
       boards[playerTurn].drawBoard(locationData[playerTurn][0][0], locationData[playerTurn][0][1]);
       boards[playerTurn].drawShips();
@@ -105,6 +107,11 @@ void mouseClicked() {
       boards[playerTurn].ships[shipNumber].rotateShip();
     } 
     
+  } else if (winner == -1) {
+    if (mouseX > locationData[playerTurn][1][0] && mouseX < locationData[playerTurn][1][0] + 380 && mouseY > locationData[playerTurn][1][1] && mouseY < locationData[playerTurn][1][1] + 380) {
+        boards[opposite].addTarget(boards[opposite].properX(locationData[playerTurn][1][0]), boards[opposite].properY(locationData[playerTurn][1][1]));
+        playerTurn = opposite;
+    }
   }
 }
 

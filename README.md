@@ -70,4 +70,4 @@ Change Log
 | 2015-01-19 | SWL          | Fixed the paths each color takes in Trouble |
 | 2015-01-20 | DZ           | Started Gameplay, Draws own and opponents board, Adds targeting animation |
 | 2015-01-20 | SWL          | Redid my mess with boolean variables and simplified my order-choosing for Trouble |
-
+| 2015-01-20 | DZ           | Changed Player turns and allowed for marking of ships being hit |

@@ -35,10 +35,10 @@ class Board{
       for (int j = 0; j < field[i].length; j++ ) {
         if (field[i][j] == 'm') {
           fill(255,255,255);
-          ellipse(x + 38 * i, y + 38 * j, 32, 32);
+          ellipse(x + 38 * i + 19, y + 38 * j + 19, 24, 24);
         } else if (field[i][j] == 'h') {
           fill(255,0,0);
-          ellipse(x + 38 * i, y + 38 * j, 32, 32);
+          ellipse(x + 38 * i + 19, y + 38 * j + 19, 24, 24);
         }
       }
     }
@@ -81,6 +81,18 @@ class Board{
       for (int i = 0; i < s.shipLength; i++) {
         field[x][i + y] = 's';
       }
+    }
+  }
+  
+  char checkTarget(int x, int y) {
+    return field[x][y];
+  }
+  
+  void addTarget(int  x, int y) {
+    if (field[x][y] == 's') {
+      field[x][y] = 'h';
+    } else if (field[x][y] == 'o') {
+      field[x][y] = 'm';
     }
   }
   

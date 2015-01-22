@@ -90,8 +90,12 @@ class Board{
   
   void addTarget(int  x, int y) {
     if (field[x][y] == 's') {
+      explode.rewind();
+      explode.play();
       field[x][y] = 'h';
     } else if (field[x][y] == 'o') {
+      splash.rewind();
+      splash.play();
       field[x][y] = 'm';
     }
   }

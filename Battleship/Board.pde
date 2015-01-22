@@ -96,6 +96,18 @@ class Board{
     }
   }
   
+  boolean checkWin() {
+    int counter = 0;
+    for (int i = 0; i < field.length; i++) {
+      for (int j = 0 ; j < field[i].length; j++) {
+        if (field[i][j] == 's') {
+          counter += 1;
+        }
+      }
+    }
+    return counter == 0;
+  }
+  
   int properX(int x) {
     return (int)((mouseX - x) / 38);
   }

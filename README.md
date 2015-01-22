@@ -71,3 +71,4 @@ Change Log
 | 2015-01-20 | DZ           | Started Gameplay, Draws own and opponents board, Adds targeting animation |
 | 2015-01-20 | SWL          | Redid my mess with boolean variables and simplified my order-choosing for Trouble |
 | 2015-01-20 | DZ           | Changed Player turns and allowed for marking of ships being hit |
+| 2015-01-21 | SWL          | Began working on turns and added visual onto the board |

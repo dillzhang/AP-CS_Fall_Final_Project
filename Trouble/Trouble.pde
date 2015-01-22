@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Arrays;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Instance Variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 /*
@@ -20,6 +21,8 @@ private int[][] greenPath = new int[][] { {138,138},{215,80},{304,43},{400,30},{
 //this is used to keep track of each player's/AI's info
 private int[][] pInfo = new int[4][6];
 
+private int[] order = new int[4];
+
 /*
   Most of the boolean variables are just used to keep track of certain that happen. circle is used
   to alternate between drawing an ellipse and writing a number when rolling (flashing). clicked
@@ -37,7 +40,7 @@ private boolean gPlayer,yPlayer,rPlayer,bPlayer;
 //roll is used for keeping track of what number has been rolled while the flashR is flashing
 //time is used keep track of time when the flashR is flashing
 //level is to keep track of what part of the game the user is currently at
-private int roll, time,level;
+private int roll, time,level, turn, maxTurn;
 
 //self-explained
 private Random r = new Random();
@@ -49,14 +52,17 @@ void setup(){
     PFont font;
     font = createFont("bubble.ttf",200);
     textFont(font);
-    level = turn = 0;
+    level = 0;
     for (int x = 0; x < 4; x++){
+        order[x] = -1;
 	for (int y = 0; y < 6; y++){
 	    if (y == 0) pInfo[x][y] = 1;
+            if (y == 1) pInfo[x][y] = 10;
 	    else pInfo[x][y] = 0;
 	}
     }
-    gPlayer = yPlayer = rPlayer = bPlayer = clicked = circle = rolling = false;
+    gPlayer = yPlayer = rPlayer = bPlayer = clicked = circle = false;
+    turn = maxTurn = 0;
     promptNewGame();
 }
 
@@ -279,16 +285,16 @@ private void showQuad(){
     fill(0);
     textSize(400);
     textAlign(CENTER,TOP);
-    if (pInfo[0][1] > 0){
+    if (pInfo[0][1] > 0 && pInfo[0][1] <= 6){
 	text(pInfo[0][1],200,-100);
     }
-    if (pInfo[1][1] > 0){
+    if (pInfo[1][1] > 0  && pInfo[1][1] <= 6){
 	text(pInfo[1][1],600,-100);
     }
-    if (pInfo[2][1] > 0){
+    if (pInfo[2][1] > 0 && pInfo[2][1] <= 6){
 	text(pInfo[2][1],200,300);
     }
-    if (pInfo[3][1] >0){
+    if (pInfo[3][1] >0 && pInfo[3][1] <= 6){
 	text(pInfo[3][1],600,300);
     }
     fill(205);
@@ -353,11 +359,98 @@ private void showRoll(){
     text("" + roll,350,470);
 }
 
+private void showCorners(){
+  for (int x = 0; x < 4; x++){
+    if (pInfo[x][0] == 0 || pInfo[x][0] == -1){
+      showCornerHelp(x,pInfo[x][0]);
+    }
+  }
+}
+
+private void showCornerHelp(int loc, int pai){
+  String text = "";
+  int num = 0;
+  int cornerX = 0;
+  int cornerY = 0;
+  if (loc == 0 || loc == 2) {
+     cornerX = 0;
+     textAlign(LEFT,TOP);
+  }
+  if (loc == 1 || loc == 3) {
+    cornerX = 800;
+    textAlign(RIGHT,TOP);
+  }
+  if (loc == 0 || loc == 1) cornerY = 0;
+  if (loc == 2 || loc == 3) cornerY = 700;
+  if (pai == -1) text = "AI: ";
+  if (pai == 0) text = "P: ";
+  for (int x = 2; x < 6; x++){
+    if (pInfo[loc][x] == 0) num++;
+  }
+  fill(255);
+  textSize(50);
+  text(text + num, cornerX, cornerY);
+}
+
+private void orderTurns(){
+  for (int i = 0; i < 4; i++){
+    order[i] = pInfo[i][1];
+  }
+  Arrays.sort(order);
+  print(order[0]);
+  print(order[1]);
+  print(order[2]);
+  print(order[3] + "\n");
+  for (int j = 0; j < 4; j++){
+    for (int k = 0; k < 4; k++){
+      if (order[j] == pInfo[k][1]) order[j] = k;
+    }
+  }
+  print(order[0]);
+  print(order[1]);
+  print(order[2]);
+  print(order[3]);
+}
+private void decideTurn(){
+  
+}
+
+private void setMaxTurn(){
+  for (int x = 0; x < 4; x++){
+    if (pInfo[x][0] == 0 || pInfo[x][0] == -1){
+      maxTurn++;
+    }
+  }
+}
+
+private void showTurn(){
+  String s = "";
+  if (turn == 0) s = "Green's Turn";
+  if (turn == 1) s = "Yellow's Turn";
+  if (turn == 2) s = "Red's Turn";
+  if (turn == 3) s = "Blue's Turn";
+  textAlign(CENTER,TOP);
+  textSize(25);
+  text(s, 400, 200);
+}
+private void playGame(){
+  for (int x = 0; x < 4; x++){
+    
+  }
+}
+
+
+private void playPerson(){
+}
+
+private void playAI(){
+}
+
+
 //this takes a click and decides what to do based on a mix of boolean variables, level, and mouse location
 void mouseClicked(){
     if (dist(mouseX,mouseY,400,400)<= 100 && level > 1){
 	roll = r.nextInt(6) + 1;
-        rolling = true;
 	clicked = true;
 	time = second();
     }
@@ -411,17 +504,26 @@ void mouseClicked(){
     }
     if (dist(mouseX,mouseY,400,400)<= 100 && level == 2){
 	drawBoard();
+        showCorners();
+        orderTurns();
+        showTurn();
     }
 }
 
 // this is my testing shortcut
 void keyPressed(){
     if (key == 's') setup();
+    if (key == 'd') {
+      drawBoard();
+      level = 2;
+    }
 }
 
 // this redraws what is necessary
 void draw(){
-    if (second() < (time + 2) && clicked && level >= 1) flashR();
+    if (second() < (time + 2) && clicked && level >= 1) {
+      flashR();
+    }
     else if (clicked) showRoll();
     if (second() > (time + 1) && level == 1) showQuad();
     if (level == 0) showPlayers();

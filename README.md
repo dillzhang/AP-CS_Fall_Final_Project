@@ -76,3 +76,6 @@ Change Log
 | 2015-01-22 | DZ           | Integrated Battleship into Hub, Modified to return to hub and act as a class file, Add section in Hub |
 | 2015-01-22 | DZ           | Commented for stand-alone Simon |
 | 2015-01-22 | DZ           | Commented for connect-hub Simon |
+| 2015-01-22 | SWL          | Removed AI from Trouble and made a basic version of it |
+| 2015-01-22 | SWL          | Commented on stand-alone Trouble |
+

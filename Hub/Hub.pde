@@ -6,7 +6,7 @@ private Minim loader;
 
 private Connect connect;
 private Simon simon;
-//private Trouble trouble;
+private Trouble trouble;
 private Battleship battleship;
 
 public int choice = 4;
@@ -16,11 +16,16 @@ public int choice = 4;
 void setup() {
   loader = new Minim(this);
 
+    PFont font = createFont("LucidaGrande",1);
+    textFont(font);
+    strokeWeight(0);
+    
+
   if (choice == 4) { 
 
     connect = new Connect();
     simon = new Simon();
-    //trouble = new Trouble();
+    trouble = new Trouble();
     battleship = new Battleship();
 
     stroke(0,0,0);
@@ -94,7 +99,11 @@ void setup() {
 
     fill(255, 255, 255);
     text("Trouble!", 200, 750);
-
+    PImage TroubleImgHub;
+    TroubleImgHub = loadImage("Trouble_logo.png");
+    image(TroubleImgHub,60,560,250,163);
+    
+    fill(255, 255, 255);
     text("BattleShip", 600, 750);
     PImage BattleshipImgHub;
     BattleshipImgHub = loadImage("Battleship_logo.png");
@@ -105,7 +114,7 @@ void setup() {
   } else if (choice == 1) {
     simon.setup();
   } else if (choice == 2) {
-    //trouble.setup();
+    trouble.setup();
   } else if (choice == 3) {
     battleship.setup();
   }
@@ -121,7 +130,7 @@ void draw() {
   } else if (choice == 1) {
     simon.draw();
   } else if (choice == 2) {
-    //trouble.draw();
+    trouble.draw();
   } else if (choice == 3) {
     battleship.draw();
   }
@@ -149,7 +158,7 @@ void mouseClicked() {
   } else if (choice == 1) {
     simon.mouseClicked();
   } else if (choice == 2) {
-    //trouble.mouseClicked();
+    trouble.mouseClicked();
   } else if (choice == 3) {
     battleship.mouseClicked();
   }
@@ -179,7 +188,7 @@ void keyPressed() {
   } else if (choice == 1) {
     simon.keyPressed();
   } else if (choice == 2) {
-    //trouble.keyPressed();
+    trouble.keyPressed();
   } else if (choice == 3) {
     battleship.keyPressed();
   }

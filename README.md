@@ -13,7 +13,7 @@ Classic Board Games Reborn on the Computer through Processing
 - [X] Connect 4  -> Completed by SWL
 - [X] Simon Says -> Completed by DZ
 - [X] Battleship -> Completed by DZ
-- [ ] Trouble
+- [X] Trouble -> Completed by SWL
 - [ ] Go
 - [ ] Chess
 - [ ] Checker

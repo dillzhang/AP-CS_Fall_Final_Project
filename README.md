@@ -10,9 +10,9 @@ Sammi Wu Leung & Dillon Zhang (Period 2)
 Project
 =======
 Classic Board Games Reborn on the Computer through Processing
-- [X] Connect 4 -> Completed by SWL
+- [X] Connect 4  -> Completed by SWL
 - [X] Simon Says -> Completed by DZ
-- [ ] Battleship
+- [X] Battleship -> Completed by DZ
 - [ ] Trouble
 - [ ] Go
 - [ ] Chess
@@ -74,3 +74,4 @@ Change Log
 | 2015-01-21 | SWL          | Began working on turns and added visual onto the board |
 | 2015-01-22 | DZ           | Finished Battleship, Added Audio to Battleship, Cleaned up transitions, Added informational text, Modified formating |
 | 2015-01-22 | DZ           | Integrated Battleship into Hub, Modified to return to hub and act as a class file, Add section in Hub |
+| 2015-01-22 | DZ           | Commented for stand-alone Simon |

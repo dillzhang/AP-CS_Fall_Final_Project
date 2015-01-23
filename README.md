@@ -23,11 +23,27 @@ The number of games will depend on what time allows.
 If time allows, AI will be added to some games to allow for single and multiplayer.
 
 Link games together with a central HUB with Processing
-- [ ] Create HUB to link games
+- [X] Create HUB to link games -> Completed by DZ
 
 Usage
 =====
-WIP
+Our project is a combination of four board games, Battleship, Connect 4, Simon Says, & Trouble. There are two main ways to run our project. 
+
+The first method is selecting a game and downloading the corresponding folder. Each game can run on its own within its folder. To run the game, open its main Processing file. <GameName>.pde These games are slighty rudimentary compared to the final game put in the main hub, but will provide proper game play.
+
+The second method is downloading the hub folder. Run Hub.pde in order to start the games. It will open a main menu where one can select games. One can always return to the main menu throught the clicking of the 'Return to Hub' or pressing the 'm' key. 
+
+_Battleship_
+Battleship is a 2-player game. It starts with the setup phase where users will be prompted to place their ships on the board. The next phase is the gameplay where users take turns guessing the locations of the other ships. The first person to strike all the opponent's ship wins the game. ALl gameplay is done through the mouse.
+
+_Connect 4_
+Connect 4 is a 2-player game. It starts auttomatically with a new game. The first player is the color black; the second, red. Players try to have 4 adjacent pieces that are either vertical, horizontal, or diagonal to each other. The first person to do so, wins the game. Gameplay can be done with either keyboard keys or by clicking.
+
+_Simon Says_
+Simon Says is a simple pattern memorization game. The computer will play a sequence and the user has to memorize it. You can either play with the mouse by clicking on the color sectors or using the keys 'h', 'g', 't', or 'y'. 
+
+_Trouble_
+Trouble is a simple 2-4 player board game. You first choose the amount of players then the order is randomly selected – lower rolls play first. After that, the goal is to go around the board from each player's starting point once to win. The game is purely clicking-only.
 
 Change Log
 ==========
@@ -78,4 +94,5 @@ Change Log
 | 2015-01-22 | DZ           | Commented for connect-hub Simon |
 | 2015-01-22 | SWL          | Removed AI from Trouble and made a basic version of it |
 | 2015-01-22 | SWL          | Commented on stand-alone Trouble |
-
+| 2015-01-23 | DZ           | Connected Trouble to Hub and added Hub image | 
+| 2015-01-23 | SWL          | Added Usage to README | 

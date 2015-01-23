@@ -72,3 +72,5 @@ Change Log
 | 2015-01-20 | SWL          | Redid my mess with boolean variables and simplified my order-choosing for Trouble |
 | 2015-01-20 | DZ           | Changed Player turns and allowed for marking of ships being hit |
 | 2015-01-21 | SWL          | Began working on turns and added visual onto the board |
+| 2015-01-22 | DZ           | Finished Battleship, Added Audio to Battleship, Cleaned up transitions, Added informational text, Modified formating |
+| 2015-01-22 | DZ           | Integrated Battleship into Hub, Modified to return to hub and act as a class file, Add section in Hub |

@@ -7,7 +7,7 @@ private Minim loader;
 private Connect connect;
 private Simon simon;
 //private Trouble trouble;
-//private Battleship battleship;
+private Battleship battleship;
 
 public int choice = 4;
 
@@ -21,7 +21,7 @@ void setup() {
     connect = new Connect();
     simon = new Simon();
     //trouble = new Trouble();
-    //battleship = new Battleship();
+    battleship = new Battleship();
 
     stroke(0,0,0);
 
@@ -92,9 +92,14 @@ void setup() {
     fill(204, 204, 204);
     ellipse(650, 180, 40, 40);
 
+    fill(255, 255, 255);
     text("Trouble!", 200, 750);
 
-    text("COMING SOON", 600, 750);
+    text("BattleShip", 600, 750);
+    PImage BattleshipImgHub;
+    BattleshipImgHub = loadImage("Battleship_logo.png");
+    image(BattleshipImgHub,500,575,248,120);
+    
   } else if (choice == 0) {
     connect.setup();
   } else if (choice == 1) {
@@ -102,7 +107,7 @@ void setup() {
   } else if (choice == 2) {
     //trouble.setup();
   } else if (choice == 3) {
-    //battleship.setup()
+    battleship.setup();
   }
 }
 
@@ -118,7 +123,7 @@ void draw() {
   } else if (choice == 2) {
     //trouble.draw();
   } else if (choice == 3) {
-    //battleship.draw()
+    battleship.draw();
   }
 }
 
@@ -136,8 +141,8 @@ void mouseClicked() {
       choice = 2;
       setup();
     } else if (mouseX > 400 && mouseY > 400) {
-      //choice = 3;
-      //setup();
+      choice = 3;
+      setup();
     }
   } else if (choice == 0) {
     connect.mouseClicked();
@@ -146,7 +151,7 @@ void mouseClicked() {
   } else if (choice == 2) {
     //trouble.mouseClicked();
   } else if (choice == 3) {
-    //battleship.mouseClicked()
+    battleship.mouseClicked();
   }
 }
 
@@ -166,8 +171,8 @@ void keyPressed() {
       choice = 2;
       setup();
     } else if (key == '4') {
-      //choice = 3;
-      //setup();
+      choice = 3;
+      setup();
     }
   } else if (choice == 0) {
     connect.keyPressed();
@@ -176,7 +181,7 @@ void keyPressed() {
   } else if (choice == 2) {
     //trouble.keyPressed();
   } else if (choice == 3) {
-    //battleship.keyPressed()
+    battleship.keyPressed();
   }
 }
 

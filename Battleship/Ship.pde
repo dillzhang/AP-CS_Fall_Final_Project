@@ -1,24 +1,28 @@
 class Ship {
-  
+  //Instance Variables
   private int shipLength, xStart, yStart;
   private boolean horizontal, settled;
   
+  //Setup ships based on length
   Ship(int l) {
     shipLength = l;
     horizontal = true;
     settled = false;
   }
   
+  //Changes the orientation of ships
   void rotateShip() {
     horizontal = ! horizontal;
   }
   
+  //Sets the location of the ship, Saves it in the instance
   void setLocation(int x, int y) {
     xStart = x;
     yStart = y;
     settled = true;
   }
 
+  //Draws ship at specified location using x and y coorindates
   void drawShip(int x, int y) {
     
     fill(204,204,204);
@@ -44,6 +48,7 @@ class Ship {
     }
   }
   
+  //Draws the ship where it was set (Using setLocation())
   void drawShipLoc() {
     drawShip(xStart, yStart);
   }

@@ -34,13 +34,13 @@ The first method is selecting a game and downloading the corresponding folder. E
 The second method is downloading the hub folder. Run Hub.pde in order to start the games. It will open a main menu where one can select games. One can always return to the main menu throught the clicking of the 'Return to Hub' or pressing the 'm' key. 
 
 _Battleship_
-Battleship is a 2-player game. It starts with the setup phase where users will be prompted to place their ships on the board. The next phase is the gameplay where users take turns guessing the locations of the other ships. The first person to strike all the opponent's ship wins the game. ALl gameplay is done through the mouse.
+Battleship is a 2-player game. It starts with the setup phase where users will be prompted to place their ships on the board. The next phase is the gameplay where users take turns guessing the locations of the other ships. The first person to strike all the opponent's ship wins the game. All gameplay is done through the mouse.
 
 _Connect 4_
 Connect 4 is a 2-player game. It starts auttomatically with a new game. The first player is the color black; the second, red. Players try to have 4 adjacent pieces that are either vertical, horizontal, or diagonal to each other. The first person to do so, wins the game. Gameplay can be done with either keyboard keys or by clicking.
 
 _Simon Says_
-Simon Says is a simple pattern memorization game. The computer will play a sequence and the user has to memorize it. You can either play with the mouse by clicking on the color sectors or using the keys 'h', 'g', 't', or 'y'. 
+Simon Says is a simple pattern memorization game. The computer will play a sequence and the user has to memorize it. You can either play with the mouse by clicking on the color sectors or using the keys 'h' for red, 'g' for green, 't' for blue, or 'y' for yellow. 
 
 _Trouble_
 Trouble is a simple 2-4 player board game. You first choose the amount of players then the order is randomly selected – lower rolls play first. After that, the goal is to go around the board from each player's starting point once to win. The game is purely clicking-only.

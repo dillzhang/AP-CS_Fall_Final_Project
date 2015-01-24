@@ -212,13 +212,11 @@ class Simon extends Game {
       levellength = 3;
       computermoves = new ArrayList<Integer>();
       createlevel();
-      //lose.rewind();
       newgame = false;
     } else if (levelup) {
       setupGame();
       levellength += 1;
       createlevel();
-      //victory.rewind();
       levelup = false;
     } else if (key == 'm') {
       choice = 4;

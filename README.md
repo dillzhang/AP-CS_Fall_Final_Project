@@ -31,7 +31,7 @@ Our project is a combination of four board games, Battleship, Connect 4, Simon S
 
 The first method is selecting a game and downloading the corresponding folder. Each game can run on its own within its folder. To run the game, open its main Processing file. <GameName>.pde These games are slighty rudimentary compared to the final game put in the main hub, but will provide proper game play.
 
-The second method is downloading the hub folder. Run Hub.pde in order to start the games. It will open a main menu where one can select games. One can always return to the main menu throught the clicking of the 'Return to Hub' or pressing the 'm' key. 
+The second method is downloading the hub folder. Run Hub.pde in order to start the games. It will open a main menu where one can select games. One can always return to the main menu throught the clicking of the 'Return to Hub' or pressing the 'm' key. The Hub uses both the mouse to click on the sectors  and the keys 1, 2, 3, and 4 to selct games.
 
 _Battleship_
 Battleship is a 2-player game. It starts with the setup phase where users will be prompted to place their ships on the board. The next phase is the gameplay where users take turns guessing the locations of the other ships. The first person to strike all the opponent's ship wins the game. All gameplay is done through the mouse.
@@ -96,3 +96,5 @@ Change Log
 | 2015-01-22 | SWL          | Commented on stand-alone Trouble |
 | 2015-01-23 | DZ           | Connected Trouble to Hub and added Hub image | 
 | 2015-01-23 | SWL          | Added Usage to README | 
+| 2015-01-24 | DZ           | Finished commenting code for Hub and Hub's games |
+| 2015-01-24 | SWL / DZ     | **Finished Project** | 

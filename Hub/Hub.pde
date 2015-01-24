@@ -2,38 +2,47 @@ import ddf.minim.*;
 
 // INSTANCE VARIABLES ====================================================================================================================================================================================
 
+//Audio Loacer
 private Minim loader;
 
+//Game Classes
 private Connect connect;
 private Simon simon;
 private Trouble trouble;
 private Battleship battleship;
 
-public int choice = 4;
+//Choice to determine which game is being play (or hub if choice is 4)
+private int choice = 4;
 
 // Setup() =============================================================================================================================================================================================
 
 void setup() {
+  //Sets up audio loader
   loader = new Minim(this);
-
-    PFont font = createFont("LucidaGrande",1);
-    textFont(font);
-    strokeWeight(0);
+  
+  //Sets up default font
+  PFont font = createFont("LucidaGrande",1);
+  textFont(font);
+  strokeWeight(0);
     
-
+  //Default hub setup
   if (choice == 4) { 
-
+    
+    //Initializes Games
     connect = new Connect();
     simon = new Simon();
     trouble = new Trouble();
     battleship = new Battleship();
 
+    //Resets Stroke
     stroke(0,0,0);
 
+    //Sets the World up 
     size(800, 800);
     background(0, 0, 0);
     textAlign(CENTER, CENTER);
 
+    //Sets up the selection screen
     fill(255, 0, 0);
     rect(10, 10, 380, 380);
 
@@ -97,18 +106,21 @@ void setup() {
     fill(204, 204, 204);
     ellipse(650, 180, 40, 40);
 
+    //Trouble Quadrant
     fill(255, 255, 255);
     text("Trouble!", 200, 750);
     PImage TroubleImgHub;
     TroubleImgHub = loadImage("Trouble_logo.png");
     image(TroubleImgHub,60,560,250,163);
     
+    //Battleship Quadrant
     fill(255, 255, 255);
     text("BattleShip", 600, 750);
     PImage BattleshipImgHub;
     BattleshipImgHub = loadImage("Battleship_logo.png");
     image(BattleshipImgHub,500,575,248,120);
     
+    //Runs setup() of corresponding game based on choice
   } else if (choice == 0) {
     connect.setup();
   } else if (choice == 1) {
@@ -124,7 +136,10 @@ void setup() {
 
 void draw() {
   if (choice == 4) {
+    //Constantly setups if choice is the hub
     setup();
+    
+    //Runs draw() of corresponding game based on choice
   } else if (choice == 0) {
     connect.draw();
   } else if (choice == 1) {
@@ -139,7 +154,9 @@ void draw() {
 // mouseClicked() ========================================================================================================================================================================================
 
 void mouseClicked() {
+  //If selected the hub
   if (choice == 4) {
+    //Change choice based on which quadrant the user clicks on
     if (mouseX < 400 && mouseY < 400) {
       choice = 0;
       setup();
@@ -153,6 +170,8 @@ void mouseClicked() {
       choice = 3;
       setup();
     }
+    
+    //Runs mouseClicked() of corresponding game based on choice
   } else if (choice == 0) {
     connect.mouseClicked();
   } else if (choice == 1) {
@@ -168,8 +187,9 @@ void mouseClicked() {
 
 
 void keyPressed() {
+  //If selected the bub
   if (choice == 4) {
-
+    //Change choice based on numeric key pressed by user
     if (key == '1') {
       choice = 0;
       setup();
@@ -183,6 +203,8 @@ void keyPressed() {
       choice = 3;
       setup();
     }
+    
+    //Run keyPressed() of corresponding game based on choice
   } else if (choice == 0) {
     connect.keyPressed();
   } else if (choice == 1) {

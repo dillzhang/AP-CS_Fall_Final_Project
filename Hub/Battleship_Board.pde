@@ -1,10 +1,16 @@
 class Battleship_Board{
+
+  //Instance Variables  
+  private char[][] field = new char[10][10]; //2D array to store the board 
   
-  private char[][] field = new char[10][10];
-  
+  //Ships designated to be a part of the board
   private Battleship_Ship s1 = new Battleship_Ship(2), s2 = new Battleship_Ship(4), s3 = new Battleship_Ship(4), s4 = new Battleship_Ship(5), s5 = new Battleship_Ship(7);
+  //Array to store all the ship
   public final Battleship_Ship[] ships = {s1, s2, s3, s4, s5};
  
+  //Constructor
+  
+  //Fills board with 'o' by default
   Battleship_Board() {
     for (int i = 0; i < field.length ; i++) {
       for (int j = 0; j < field[i].length ; j++) {
@@ -13,6 +19,9 @@ class Battleship_Board{
     }
   }
   
+  //Methods
+  
+  //Tiles rectangles in order to visually display a board
   void drawBoard(int x, int y) {
     for (int i = 0; i < field.length ; i++ ) {
       for (int j = 0; j < field[i].length; j++) {
@@ -22,6 +31,7 @@ class Battleship_Board{
     }
   }
   
+  //Draws all ships that have been set already
   void drawShips() {
     for (int i = 0; i < ships.length ; i++) {
       if (ships[i].settled) {
@@ -30,6 +40,7 @@ class Battleship_Board{
     }
   }
   
+  //Draws white dots at location where guesses result in misses and red dots at location where guesses result in hits
   void drawShots(int x, int y) {
     for (int i = 0; i < field.length ; i++ ) {
       for (int j = 0; j < field[i].length; j++ ) {
@@ -44,6 +55,7 @@ class Battleship_Board{
     }
   } 
   
+  //Drawing of a target, Spite for a mouse during the guessing phase
   void drawTarget(int x, int y) {
     fill(255,0,0);
     ellipse(x + 19, y + 19, 28, 28);
@@ -55,6 +67,7 @@ class Battleship_Board{
     ellipse(x + 19, y + 19, 6, 6);
   }
   
+  //Checks a ship can be placed at a certain x and y coordinate
   boolean checkLocation(int x, int y, Battleship_Ship s) {
     if (s.horizontal) {
       for (int i = 0; i < s.shipLength; i++) {
@@ -72,6 +85,7 @@ class Battleship_Board{
     return true;
   }
   
+  //Adds the ship to the information stored in the 2D array
   void placeShip(int x, int y, Battleship_Ship s) {
     if (s.horizontal) {
       for (int i = 0; i < s.shipLength; i++) {
@@ -84,10 +98,7 @@ class Battleship_Board{
     }
   }
   
-  char checkTarget(int x, int y) {
-    return field[x][y];
-  }
-  
+  //Stores data of hitting or missing based on the location of a guess
   void addTarget(int  x, int y) {
     if (field[x][y] == 's') {
       //explode.rewind();
@@ -100,6 +111,7 @@ class Battleship_Board{
     }
   }
   
+  //Check theres is no more ship data and declares if a player has won
   boolean checkWin() {
     int counter = 0;
     for (int i = 0; i < field.length; i++) {
@@ -112,10 +124,12 @@ class Battleship_Board{
     return counter == 0;
   }
   
+  //Fixes the x coordinate of the mouse to be used relative to the board
   int properX(int x) {
     return (int)((mouseX - x) / 38);
   }
   
+  //Fixes the y coordinate of the mouse to be used relative to the board
   int properY(int y) {
     return (int)((mouseY - y) / 38);
   }
